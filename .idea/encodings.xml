@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/ActiveMQManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Receiver.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Sender.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/analyst/RequestAnalyst.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/analyst/RequestHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/analyst/TaskGenerator.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/ClassInfo.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/MetaInfo.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/Task.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/TaskInterface.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/Job.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/JobList.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/MsgType.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/RequestJob.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/SendJob.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/Upload.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/taskarchiver/TaskAchieverCore.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/taskarchiver/TaskPacker.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/taskarchiver/TaskUnpacker.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/taskdistributor/TaskDistributor.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/taskdistributor/TaskDistributorCore.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/ConsolePanel.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java" charset="UTF-8" />
   </component>

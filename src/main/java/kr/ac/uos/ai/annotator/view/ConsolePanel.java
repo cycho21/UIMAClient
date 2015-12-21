@@ -1,7 +1,5 @@
 package kr.ac.uos.ai.annotator.view;
 
-import kr.ac.uos.ai.annotator.configure.Configuration;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,18 +14,7 @@ public class ConsolePanel extends JPanel {
 
     private JTextArea textArea;
     private Font font;
-
-    public ConsolePanel(LayoutManager layout, boolean isDoubleBuffered) {
-        super(layout, isDoubleBuffered);
-    }
-
-    public ConsolePanel(LayoutManager layout) {
-        super(layout);
-    }
-
-    public ConsolePanel(boolean isDoubleBuffered) {
-        super(isDoubleBuffered);
-    }
+    private JScrollPane scrollPane;
 
     public ConsolePanel() {
     }
@@ -35,22 +22,19 @@ public class ConsolePanel extends JPanel {
     public void init() {
         font = new Font("Verdana", Font.BOLD, 12);
 
-        textArea = new JTextArea();
+        textArea = new JTextArea(18, 65);
         textArea.setBackground(new Color(16, 78, 139));
-        textArea.setPreferredSize(new Dimension(Configuration.WIDTH - 15, 200 - 15));
-        textArea.setEditable(true);
-
-        textArea.setFont(font);
         textArea.setForeground(Color.WHITE);
-
-        JScrollPane scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                                    JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setSize(new Dimension(Configuration.WIDTH, 200));
+        textArea.setFont(font);
+        scrollPane = new JScrollPane(textArea);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane);
     }
 
     public void printTextAndNewLine(String text) {
         textArea.append(text + "\n");
+//        scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
 
@@ -67,4 +51,12 @@ public class ConsolePanel extends JPanel {
         this.textArea = testArea;
     }
 
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
 }

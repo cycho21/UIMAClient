@@ -1,5 +1,6 @@
 package kr.ac.uos.ai.annotator.view;
 
+import kr.ac.uos.ai.annotator.activemq.Sender;
 import kr.ac.uos.ai.annotator.configure.Configuration;
 import kr.ac.uos.ai.annotator.controller.CustomListener;
 import kr.ac.uos.ai.annotator.controller.EventAnalyst;
@@ -28,6 +29,7 @@ public class GUIManager {
     private CustomComboBox customComboBox;
     private Font font;
     private EventAnalyst eventAnalyst;
+    private Sender sdr;
 
     public GUIManager() {
     }
@@ -43,8 +45,8 @@ public class GUIManager {
         } catch (Exception e) {
         }
         font = new Font("CourierNew", Font.PLAIN, 16);
-        makeFrame();
-        makePanels();
+//        makeFrame();
+//        makePanels();
         setMsgTypeComboBox();
         setSecondComboBox();
         setBorderLayout();
@@ -82,7 +84,7 @@ public class GUIManager {
         DefaultListCellRenderer defaultListCellRenderer = new DefaultListCellRenderer();
         defaultListCellRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
         customComboBox.setRenderer(defaultListCellRenderer);
-        eventAnalyst = new EventAnalyst(customFrame, consolePanel);
+//        eventAnalyst = new EventAnalyst(customFrame, consolePanel);
         customListener.setEventAnalyst(eventAnalyst);
         customComboBox.setPreferredSize(new Dimension(Configuration.WIDTH, 50));
         customComboBox.setSelectedIndex(0);
@@ -124,20 +126,127 @@ public class GUIManager {
         customFrame.setLayout(new BorderLayout());
     }
 
-    private void makePanels() {
+    public void makePanels() {
         customPanel = new CustomPanel();
         customPanel.setBackground(Color.WHITE);
         customPanel.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT - 200));
-
         consolePanel = new ConsolePanel();
+        consolePanel.setPreferredSize(new Dimension(Configuration.WIDTH, 300));
         consolePanel.init();
-        consolePanel.setPreferredSize(new Dimension(Configuration.WIDTH, 200));
     }
 
-    private void makeFrame() {
+    public void makeFrame() {
         customFrame = new CustomFrame("UIMA Framework Management");
         customFrame.setBackground(Color.WHITE);
         customFrame.setResizable(false);
         customFrame.setDefaultCloseOperation(CustomFrame.EXIT_ON_CLOSE);
+    }
+
+    public void setSender(Sender sdr) {
+        this.sdr = sdr;
+    }
+
+    public CustomListener getCustomListener() {
+        return customListener;
+    }
+
+    public void setCustomListener(CustomListener customListener) {
+        this.customListener = customListener;
+    }
+
+    public CustomFrame getCustomFrame() {
+        return customFrame;
+    }
+
+    public void setCustomFrame(CustomFrame customFrame) {
+        this.customFrame = customFrame;
+    }
+
+    public CustomPanel getCustomPanel() {
+        return customPanel;
+    }
+
+    public void setCustomPanel(CustomPanel customPanel) {
+        this.customPanel = customPanel;
+    }
+
+    public ConsolePanel getConsolePanel() {
+        return consolePanel;
+    }
+
+    public void setConsolePanel(ConsolePanel consolePanel) {
+        this.consolePanel = consolePanel;
+    }
+
+    public JButton getServerButton() {
+        return serverButton;
+    }
+
+    public void setServerButton(JButton serverButton) {
+        this.serverButton = serverButton;
+    }
+
+    public JButton getNodeButton() {
+        return nodeButton;
+    }
+
+    public void setNodeButton(JButton nodeButton) {
+        this.nodeButton = nodeButton;
+    }
+
+    public JButton getFileImportButton() {
+        return fileImportButton;
+    }
+
+    public void setFileImportButton(JButton fileImportButton) {
+        this.fileImportButton = fileImportButton;
+    }
+
+    public JButton getRunButton() {
+        return runButton;
+    }
+
+    public void setRunButton(JButton runButton) {
+        this.runButton = runButton;
+    }
+
+    public String[] getComboBoxContents() {
+        return comboBoxContents;
+    }
+
+    public void setComboBoxContents(String[] comboBoxContents) {
+        this.comboBoxContents = comboBoxContents;
+    }
+
+    public CustomComboBox getCustomComboBox() {
+        return customComboBox;
+    }
+
+    public void setCustomComboBox(CustomComboBox customComboBox) {
+        this.customComboBox = customComboBox;
+    }
+
+    public Font getFont() {
+        return font;
+    }
+
+    public void setFont(Font font) {
+        this.font = font;
+    }
+
+    public EventAnalyst getEventAnalyst() {
+        return eventAnalyst;
+    }
+
+    public void setEventAnalyst(EventAnalyst eventAnalyst) {
+        this.eventAnalyst = eventAnalyst;
+    }
+
+    public Sender getSdr() {
+        return sdr;
+    }
+
+    public void setSdr(Sender sdr) {
+        this.sdr = sdr;
     }
 }
