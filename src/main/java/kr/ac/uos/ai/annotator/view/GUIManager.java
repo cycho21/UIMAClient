@@ -1,5 +1,6 @@
 package kr.ac.uos.ai.annotator.view;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import kr.ac.uos.ai.annotator.configure.Configuration;
 
 import javax.swing.*;
@@ -19,65 +20,67 @@ public class GUIManager {
     private ConsolePanel consolePanel;
     private JButton button;
     private boolean shouldWeightX = true;
+    private JButton serverButton;
+    private JButton nodeButton;
+    private JButton fileImportButton;
+    private JButton runButton;
 
     public GUIManager() {
     }
 
     public void init() {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
+
         makeFrame();
         makePanels();
         setBorderLayout();
-        setGridBagLayout();
+        setTopBorderLayout();
 
-        consolePanel.printTextAndNewLine("GUI Initialization OK");
 
-        customFrame.add(customPanel, BorderLayout.NORTH);
+        customFrame.add(customPanel, BorderLayout.CENTER);
         customFrame.add(consolePanel, BorderLayout.SOUTH);
         customFrame.pack();
         customFrame.setVisible(true);
+
+        /*
+            GUI init log.
+         */
+        consolePanel.printTextAndNewLine("GUI Initialization OK");
+    }
+
+    private void setTopBorderLayout() {
+        serverButton = new JButton("Get Resource From UIMA Server");
+        serverButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        nodeButton = new JButton("Get Resource From UIMA Node");
+        nodeButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+
+        runButton = new JButton("Run");
+        runButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        fileImportButton = new JButton("Import Input File from File System");
+        fileImportButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(serverButton, BorderLayout.WEST);
+        topPanel.add(nodeButton, BorderLayout.EAST);
+        customPanel.add(topPanel, BorderLayout.NORTH);
+
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(fileImportButton, BorderLayout.WEST);
+        bottomPanel.add(runButton, BorderLayout.EAST);
+        customPanel.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     private void setBorderLayout() {
         customFrame.setLayout(new BorderLayout());
-    }
-
-    private void setGridBagLayout() {
-        customPanel.setLayout(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-
-        button = new JButton("Get Resource From UIMA Server");
-
-        if (shouldWeightX) {
-            constraints.weightx = 0.5;
-            constraints.weighty = 0.5;
-        }
-
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        customPanel.add(button, constraints);
-
-
-        button = new JButton("Get Resource From UIMA Node");
-
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.weightx = 0.5;
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        customPanel.add(button, constraints);
-
-        button = new JButton("Run");
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.ipady = 0;       //reset to default
-        constraints.weighty = 1.0;   //request any extra vertical space
-        constraints.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        constraints.insets = new Insets(10,0,0,0);  //top padding
-        constraints.gridx = 1;       //aligned with button 2
-        constraints.gridwidth = 2;   //2 columns wide
-        constraints.gridy = 2;       //third row
-        customPanel.add(button, constraints);
-
     }
 
     private void makePanels() {
