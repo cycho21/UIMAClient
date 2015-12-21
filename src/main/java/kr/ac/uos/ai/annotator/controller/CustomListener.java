@@ -14,12 +14,19 @@ import java.awt.event.ActionListener;
 public class CustomListener implements ActionListener {
 
     private JComboBox msgTypeComboBox;
+    private EventAnalyst eventAnalyst;
+
+    public CustomListener(JComboBox msgTypeComboBox) {
+        this.msgTypeComboBox = msgTypeComboBox;
+    }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("comboBoxChanged")){
-            System.out.println(msgTypeComboBox.getSelectedItem());
+            eventAnalyst.firstCombo(msgTypeComboBox.getSelectedItem().toString());
         } else {
-            System.out.println(e.getActionCommand());
+            if(e.getActionCommand().equals("Choose File from File System")){
+                eventAnalyst.importFile();
+            }
         }
     }
 
@@ -29,5 +36,9 @@ public class CustomListener implements ActionListener {
 
     public void setMsgTypeComboBox(JComboBox msgTypeComboBox) {
         this.msgTypeComboBox = msgTypeComboBox;
+    }
+
+    public void setEventAnalyst(EventAnalyst eventAnalyst) {
+        this.eventAnalyst = eventAnalyst;
     }
 }

@@ -2,6 +2,7 @@ package kr.ac.uos.ai.annotator.view;
 
 import kr.ac.uos.ai.annotator.configure.Configuration;
 import kr.ac.uos.ai.annotator.controller.CustomListener;
+import kr.ac.uos.ai.annotator.controller.EventAnalyst;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ import java.awt.*;
 
 public class GUIManager {
 
-    private final CustomListener customListener;
+    private CustomListener customListener;
     private CustomFrame customFrame;
     private CustomPanel customPanel;
     private ConsolePanel consolePanel;
@@ -26,9 +27,9 @@ public class GUIManager {
     private String[] comboBoxContents;
     private CustomComboBox customComboBox;
     private Font font;
+    private EventAnalyst eventAnalyst;
 
     public GUIManager() {
-        customListener = new CustomListener();
     }
 
     public void init() {
@@ -40,7 +41,7 @@ public class GUIManager {
                 }
             }
         } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+            System.out.println("Nimbus LookAndFeel not found");
         }
         font = new Font("CourierNew", Font.PLAIN, 14);
         makeFrame();
@@ -59,12 +60,12 @@ public class GUIManager {
         /*
             GUI init log.
          */
+        consolePanel.getTextArea().setEditable(false);
         consolePanel.printTextAndNewLine("GUI Initialization OK");
     }
 
     private void setListener() {
         customComboBox.addActionListener(customListener);
-        customListener.setMsgTypeComboBox(customComboBox);
         runButton.addActionListener(customListener);
         fileImportButton.addActionListener(customListener);
         serverButton.addActionListener(customListener);
@@ -75,9 +76,12 @@ public class GUIManager {
 
     }
 
-    private void setMsgTypeComboBox() {
+    public void setMsgTypeComboBox() {
         comboBoxContents = new String[] {"upload", "getJobList", "requestJob", "sendJob"};
         customComboBox = new CustomComboBox(comboBoxContents);
+        customListener = new CustomListener(customComboBox);
+        eventAnalyst = new EventAnalyst(customFrame, consolePanel);
+        customListener.setEventAnalyst(eventAnalyst);
         customComboBox.setPreferredSize(new Dimension(Configuration.WIDTH / 5, 50));
         customComboBox.setSelectedIndex(0);
         customComboBox.setFont(font);
@@ -94,7 +98,7 @@ public class GUIManager {
         runButton = new JButton("Run");
         runButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
         runButton.setFont(font);
-        fileImportButton = new JButton("Import Input File from File System");
+        fileImportButton = new JButton("Choose File from File System");
         fileImportButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
         fileImportButton.setFont(font);
 
