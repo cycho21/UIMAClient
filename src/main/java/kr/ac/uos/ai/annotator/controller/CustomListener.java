@@ -1,5 +1,6 @@
 package kr.ac.uos.ai.annotator.controller;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,8 +13,21 @@ import java.awt.event.ActionListener;
 
 public class CustomListener implements ActionListener {
 
-    public void actionPerformed(ActionEvent e) {
+    private JComboBox msgTypeComboBox;
 
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("comboBoxChanged")){
+            System.out.println(msgTypeComboBox.getSelectedItem());
+        } else {
+            System.out.println(e.getActionCommand());
+        }
     }
 
+    public JComboBox getMsgTypeComboBox() {
+        return msgTypeComboBox;
+    }
+
+    public void setMsgTypeComboBox(JComboBox msgTypeComboBox) {
+        this.msgTypeComboBox = msgTypeComboBox;
+    }
 }

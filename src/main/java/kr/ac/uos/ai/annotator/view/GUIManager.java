@@ -1,6 +1,7 @@
 package kr.ac.uos.ai.annotator.view;
 
 import kr.ac.uos.ai.annotator.configure.Configuration;
+import kr.ac.uos.ai.annotator.controller.CustomListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,11 +15,10 @@ import java.awt.*;
 
 public class GUIManager {
 
+    private final CustomListener customListener;
     private CustomFrame customFrame;
     private CustomPanel customPanel;
     private ConsolePanel consolePanel;
-    private JButton button;
-    private boolean shouldWeightX = true;
     private JButton serverButton;
     private JButton nodeButton;
     private JButton fileImportButton;
@@ -28,6 +28,7 @@ public class GUIManager {
     private Font font;
 
     public GUIManager() {
+        customListener = new CustomListener();
     }
 
     public void init() {
@@ -48,6 +49,7 @@ public class GUIManager {
         setSecondComboBox();
         setBorderLayout();
         setTopBorderLayout();
+        setListener();
 
         customFrame.add(customPanel, BorderLayout.CENTER);
         customFrame.add(consolePanel, BorderLayout.SOUTH);
@@ -58,6 +60,15 @@ public class GUIManager {
             GUI init log.
          */
         consolePanel.printTextAndNewLine("GUI Initialization OK");
+    }
+
+    private void setListener() {
+        customComboBox.addActionListener(customListener);
+        customListener.setMsgTypeComboBox(customComboBox);
+        runButton.addActionListener(customListener);
+        fileImportButton.addActionListener(customListener);
+        serverButton.addActionListener(customListener);
+        nodeButton.addActionListener(customListener);
     }
 
     private void setSecondComboBox() {

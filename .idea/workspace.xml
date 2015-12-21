@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9480f812-3a23-43a0-a200-3a2d703aeab1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomComboBox.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/CustomListener.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/CustomListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -29,15 +28,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/Application.java">
+      <file leaf-file-name="CustomFrame.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomFrame.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-              <folding>
-                <element signature="e#508#509#0" expanded="true" />
-                <element signature="e#541#542#0" expanded="true" />
-              </folding>
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -60,27 +56,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUIManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUIManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36199096">
-              <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="66" column="56" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3676#3677#0" expanded="true" />
-                <element signature="e#3733#3734#0" expanded="true" />
+                <element signature="e#809#810#0" expanded="true" />
+                <element signature="e#862#863#0" expanded="true" />
+                <element signature="e#4154#4155#0" expanded="true" />
+                <element signature="e#4211#4212#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomListener.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CustomListener.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/CustomListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6968326">
+              <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#705#706#0" expanded="true" />
+                <element signature="e#743#744#0" expanded="true" />
+                <element signature="e#808#809#0" expanded="true" />
+                <element signature="e#862#863#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,7 +124,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomComboBox.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#345#346#0" expanded="true" />
@@ -208,9 +210,9 @@
         <option value="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/ConsolePanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/EventAnalysis.java" />
         <option value="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/EventAnalyst.java" />
-        <option value="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/CustomListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomComboBox.java" />
         <option value="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/CustomListener.java" />
       </list>
     </option>
   </component>
@@ -779,7 +781,7 @@
       <option name="number" value="Default" />
       <updated>1450621707219</updated>
       <workItem from="1450621714349" duration="1232000" />
-      <workItem from="1450669848026" duration="11262000" />
+      <workItem from="1450669848026" duration="13691000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1450621964528</created>
@@ -823,11 +825,17 @@
       <option name="project" value="LOCAL" />
       <updated>1450684184056</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="combobox required">
+      <created>1450686313720</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1450686313720</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12494000" />
+    <option name="totallyTimeSpent" value="14923000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
@@ -910,7 +918,8 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="GUI added" />
     <MESSAGE value="GUI soso" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI soso" />
+    <MESSAGE value="combobox required" />
+    <option name="LAST_COMMIT_MESSAGE" value="combobox required" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -948,20 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#441#442#0" expanded="true" />
-            <element signature="e#473#474#0" expanded="true" />
-            <element signature="e#584#585#0" expanded="true" />
-            <element signature="e#609#610#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/Application.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -969,22 +964,6 @@
           <folding>
             <element signature="e#508#509#0" expanded="true" />
             <element signature="e#541#542#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#356#357#0" expanded="true" />
-            <element signature="e#403#404#0" expanded="true" />
-            <element signature="e#451#452#0" expanded="true" />
-            <element signature="e#480#481#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
-            <element signature="e#571#572#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1026,16 +1005,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/CustomListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/EventAnalyst.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1044,18 +1013,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomComboBox.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <caret line="66" column="56" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#345#346#0" expanded="true" />
-            <element signature="e#374#375#0" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-            <element signature="e#447#448#0" expanded="true" />
-            <element signature="e#490#491#0" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
+            <element signature="e#862#863#0" expanded="true" />
+            <element signature="e#4154#4155#0" expanded="true" />
+            <element signature="e#4211#4212#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1080,14 +1047,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomComboBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36199096">
-          <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3676#3677#0" expanded="true" />
-            <element signature="e#3733#3734#0" expanded="true" />
+            <element signature="e#345#346#0" expanded="true" />
+            <element signature="e#374#375#0" expanded="true" />
+            <element signature="e#419#420#0" expanded="true" />
+            <element signature="e#447#448#0" expanded="true" />
+            <element signature="e#490#491#0" expanded="true" />
+            <element signature="e#518#519#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#356#357#0" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+            <element signature="e#451#452#0" expanded="true" />
+            <element signature="e#480#481#0" expanded="true" />
+            <element signature="e#532#533#0" expanded="true" />
+            <element signature="e#571#572#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/CustomFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/CustomListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6968326">
+          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#705#706#0" expanded="true" />
+            <element signature="e#743#744#0" expanded="true" />
+            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#862#863#0" expanded="true" />
           </folding>
         </state>
       </provider>
