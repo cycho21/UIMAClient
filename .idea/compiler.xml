@@ -26,5 +26,8 @@
         <module name="UIMAClient" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="UIMAClient" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
