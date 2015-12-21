@@ -41,9 +41,8 @@ public class GUIManager {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Nimbus LookAndFeel not found");
         }
-        font = new Font("CourierNew", Font.PLAIN, 14);
+        font = new Font("CourierNew", Font.PLAIN, 16);
         makeFrame();
         makePanels();
         setMsgTypeComboBox();
@@ -80,9 +79,12 @@ public class GUIManager {
         comboBoxContents = new String[] {"upload", "getJobList", "requestJob", "sendJob"};
         customComboBox = new CustomComboBox(comboBoxContents);
         customListener = new CustomListener(customComboBox);
+        DefaultListCellRenderer defaultListCellRenderer = new DefaultListCellRenderer();
+        defaultListCellRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+        customComboBox.setRenderer(defaultListCellRenderer);
         eventAnalyst = new EventAnalyst(customFrame, consolePanel);
         customListener.setEventAnalyst(eventAnalyst);
-        customComboBox.setPreferredSize(new Dimension(Configuration.WIDTH / 5, 50));
+        customComboBox.setPreferredSize(new Dimension(Configuration.WIDTH, 50));
         customComboBox.setSelectedIndex(0);
         customComboBox.setFont(font);
     }

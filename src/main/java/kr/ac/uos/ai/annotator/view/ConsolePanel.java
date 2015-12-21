@@ -3,7 +3,6 @@ package kr.ac.uos.ai.annotator.view;
 import kr.ac.uos.ai.annotator.configure.Configuration;
 
 import javax.swing.*;
-import javax.swing.text.Document;
 import java.awt.*;
 
 /**
@@ -51,7 +50,6 @@ public class ConsolePanel extends JPanel {
     }
 
     public void printTextAndNewLine(String text) {
-        System.out.println(text);
         textArea.append(text + "\n");
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }

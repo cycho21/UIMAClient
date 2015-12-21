@@ -18,24 +18,26 @@ public class EventAnalyst {
     private ConsolePanel consolePanel;
     private CustomFrame customFrame;
     private CustomChooser customChooser;
+    private String filePath;
+    private String comboBoxChoosed;
 
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
         this.consolePanel = consolePanel;
+        this.comboBoxChoosed = null;
+        this.filePath = null;
         JFileChooser.setDefaultLocale(Locale.US);
         customChooser = new CustomChooser();
 
     }
 
-    public String importFile() {
-        String inputFile = null;
+    public void importFile() {
         if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
             if (!customChooser.getSelectedFile().equals(null)) {
-                inputFile = customChooser.getSelectedFile().toString();
-                consolePanel.printText("Input File Select : " + inputFile);
+                filePath = customChooser.getSelectedFile().toString();
+                consolePanel.printTextAndNewLine("Input File Select : " + filePath);
             }
         }
-        return inputFile;
     }
 
     public void firstCombo(String actionCommand) {
@@ -44,18 +46,26 @@ public class EventAnalyst {
          */
         switch (actionCommand) {
             case "upload":
-                System.out.println(actionCommand);
+                this.comboBoxChoosed = actionCommand;
+                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
             case "getJobList":
-                System.out.println(actionCommand);
+                this.comboBoxChoosed = actionCommand;
+                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
             case "requestJob":
-                System.out.println(actionCommand);
+                this.comboBoxChoosed = actionCommand;
+                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
             case "sendJob":
-                System.out.println(actionCommand);
+                this.comboBoxChoosed = actionCommand;
+                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
         }
+
+    }
+
+    public void execute() {
 
     }
 }
