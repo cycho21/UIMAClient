@@ -1,6 +1,5 @@
 package kr.ac.uos.ai.annotator.view;
 
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import kr.ac.uos.ai.annotator.configure.Configuration;
 
 import javax.swing.*;
@@ -24,6 +23,9 @@ public class GUIManager {
     private JButton nodeButton;
     private JButton fileImportButton;
     private JButton runButton;
+    private String[] comboBoxContents;
+    private CustomComboBox customComboBox;
+    private Font font;
 
     public GUIManager() {
     }
@@ -39,12 +41,13 @@ public class GUIManager {
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-
+        font = new Font("CourierNew", Font.PLAIN, 14);
         makeFrame();
         makePanels();
+        setMsgTypeComboBox();
+        setSecondComboBox();
         setBorderLayout();
         setTopBorderLayout();
-
 
         customFrame.add(customPanel, BorderLayout.CENTER);
         customFrame.add(consolePanel, BorderLayout.SOUTH);
@@ -57,25 +60,46 @@ public class GUIManager {
         consolePanel.printTextAndNewLine("GUI Initialization OK");
     }
 
+    private void setSecondComboBox() {
+
+    }
+
+    private void setMsgTypeComboBox() {
+        comboBoxContents = new String[] {"upload", "getJobList", "requestJob", "sendJob"};
+        customComboBox = new CustomComboBox(comboBoxContents);
+        customComboBox.setPreferredSize(new Dimension(Configuration.WIDTH / 5, 50));
+        customComboBox.setSelectedIndex(0);
+        customComboBox.setFont(font);
+    }
+
     private void setTopBorderLayout() {
         serverButton = new JButton("Get Resource From UIMA Server");
         serverButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        serverButton.setFont(font);
         nodeButton = new JButton("Get Resource From UIMA Node");
         nodeButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        nodeButton.setFont(font);
 
         runButton = new JButton("Run");
         runButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        runButton.setFont(font);
         fileImportButton = new JButton("Import Input File from File System");
         fileImportButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        fileImportButton.setFont(font);
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(serverButton, BorderLayout.WEST);
         topPanel.add(nodeButton, BorderLayout.EAST);
         customPanel.add(topPanel, BorderLayout.NORTH);
 
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.add(fileImportButton, BorderLayout.WEST);
+        centerPanel.add(runButton, BorderLayout.EAST);
+        customPanel.add(centerPanel, BorderLayout.CENTER);
+
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(fileImportButton, BorderLayout.WEST);
-        bottomPanel.add(runButton, BorderLayout.EAST);
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+        bottomPanel.add(customComboBox);
         customPanel.add(bottomPanel, BorderLayout.SOUTH);
     }
 
