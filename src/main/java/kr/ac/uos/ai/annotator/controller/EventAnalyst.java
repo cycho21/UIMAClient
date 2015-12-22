@@ -38,11 +38,9 @@ public class EventAnalyst {
 
     public void importFile() {
         if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
-            if (!customChooser.getSelectedFile().equals(null)) {
                 filePath = customChooser.getSelectedFile().toString();
                 fileName = customChooser.getSelectedFile().getName().toString();
                 consolePanel.printTextAndNewLine("Input File Select : " + filePath);
-            }
         }
     }
 
@@ -67,6 +65,8 @@ public class EventAnalyst {
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
+            default:
+                break;
         }
 
     }
@@ -74,9 +74,10 @@ public class EventAnalyst {
     public void execute() {
         switch (comboBoxChose) {
             case "upload" :
-                System.out.println("RUN!");
                 byte[] tempByte = tp.file2Byte(filePath);
                 sdr.sendMessage(tempByte, fileName);
+                break;
+            default:
                 break;
         }
     }

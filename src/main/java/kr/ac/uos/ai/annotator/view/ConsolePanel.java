@@ -21,8 +21,7 @@ public class ConsolePanel extends JPanel {
 
     public void init() {
         font = new Font("Verdana", Font.BOLD, 12);
-
-        textArea = new JTextArea(18, 65);
+        textArea = new JTextArea(18, 97);
         textArea.setBackground(new Color(16, 78, 139));
         textArea.setForeground(Color.WHITE);
         textArea.setFont(font);
@@ -50,7 +49,6 @@ public class ConsolePanel extends JPanel {
     public void setTextArea(JTextArea testArea) {
         this.textArea = testArea;
     }
-
 
     public JScrollPane getScrollPane() {
         return scrollPane;

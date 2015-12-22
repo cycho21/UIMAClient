@@ -23,13 +23,17 @@ public class CustomListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("comboBoxChanged")){
             eventAnalyst.firstCombo(msgTypeComboBox.getSelectedItem().toString());
-        } else {
+        }
+
+        if (!e.getActionCommand().equals("comboBoxChanged")){
             switch (e.getActionCommand()) {
                 case "Choose File from File System" :
                     eventAnalyst.importFile();
                     break;
                 case "Run":
                     eventAnalyst.execute();
+                    break;
+                default:
                     break;
             }
         }

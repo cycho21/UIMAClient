@@ -7,6 +7,8 @@ import kr.ac.uos.ai.annotator.controller.EventAnalyst;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 /**
  * @author Chan Yeon, Cho
@@ -30,6 +32,7 @@ public class GUIManager {
     private Font font;
     private EventAnalyst eventAnalyst;
     private Sender sdr;
+    private JOptionPane jOptionPane;
 
     public GUIManager() {
     }
@@ -45,6 +48,7 @@ public class GUIManager {
         } catch (Exception e) {
         }
         font = new Font("CourierNew", Font.PLAIN, 16);
+        jOptionPane = new JOptionPane();
 //        makeFrame();
 //        makePanels();
         setMsgTypeComboBox();
@@ -139,7 +143,7 @@ public class GUIManager {
         customFrame = new CustomFrame("UIMA Framework Management");
         customFrame.setBackground(Color.WHITE);
         customFrame.setResizable(false);
-        customFrame.setDefaultCloseOperation(CustomFrame.EXIT_ON_CLOSE);
+        customFrame.setDefaultCloseOperation(CustomFrame.DO_NOTHING_ON_CLOSE);
     }
 
     public void setSender(Sender sdr) {
@@ -248,5 +252,14 @@ public class GUIManager {
 
     public void setSdr(Sender sdr) {
         this.sdr = sdr;
+    }
+
+    public String makeInputIPDialog() {
+        String serverIP = jOptionPane.showInputDialog(null, "Input UIMA Server IP", "UIMA Management Ver. 0.0.1",
+                JOptionPane.INFORMATION_MESSAGE);
+        if(serverIP==null) {
+            return "localhost";
+        }
+        return serverIP;
     }
 }

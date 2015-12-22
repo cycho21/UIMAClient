@@ -9,6 +9,9 @@ import kr.ac.uos.ai.annotator.taskdistributor.TaskDistributor;
 import kr.ac.uos.ai.annotator.taskdistributor.TaskDistributorCore;
 import kr.ac.uos.ai.annotator.view.GUIManager;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 /**
  * @author Chan Yeon, Cho
  * @version 0.0.1 - Snapshot
@@ -17,6 +20,8 @@ import kr.ac.uos.ai.annotator.view.GUIManager;
  */
 public class Application {
 
+
+    private String serverIP;
     private GUIManager guiManager;
     private ActiveMQManager activemqManager;
     private Sender sdr;
@@ -28,8 +33,13 @@ public class Application {
 
     public Application() {
         go();
+        setActiveMQ();
         init();
         guiManager.getConsolePanel().printTextAndNewLine("UIMA Framework Management Ready");
+    }
+
+    private void setActiveMQ() {
+        serverIP = guiManager.makeInputIPDialog();
     }
 
     private void go() {
@@ -53,16 +63,62 @@ public class Application {
         tp = tac.getPacker();
         eventAnalyst.setPacker(tp);
         activemqManager = new ActiveMQManager();
-        activemqManager.init("testQueue2");          // This init method makes receiver and starts receiver
-        activemqManager.setConsolePanel(guiManager.getConsolePanel());
+        activemqManager.setServerIP(serverIP);
         guiManager.getConsolePanel().printTextAndNewLine("Receiver Initialization OK");
 
         sdr = new Sender();
+        sdr.setServerIP(serverIP);
         sdr.setConsolePanel(guiManager.getConsolePanel());
         sdr.init();
         guiManager.getConsolePanel().printTextAndNewLine("Sender Initialization OK");
         sdr.createQueue("testQueue2");
         eventAnalyst.setSender(sdr);
+        activemqManager.setConsolePanel(guiManager.getConsolePanel());
+        activemqManager.setSender(sdr);
+        activemqManager.init("testQueue2");          // This init method makes receiver and starts receiver
+
+        guiManager.getCustomFrame().addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (serverIP == null) {
+                    System.exit(0);
+                } else {
+                    activemqManager.getReceiver().destory();
+                    sdr.destory();
+                    System.exit(0);
+                }
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
         guiManager.getConsolePanel().printTextAndNewLine("ActiveMQ Initialization OK");
     }
 

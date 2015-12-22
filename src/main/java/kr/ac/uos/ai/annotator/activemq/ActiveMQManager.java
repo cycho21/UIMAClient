@@ -1,22 +1,33 @@
 package kr.ac.uos.ai.annotator.activemq;
 
+import kr.ac.uos.ai.annotator.analyst.RequestAnalyst;
+import kr.ac.uos.ai.annotator.taskarchiver.TaskUnpacker;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
 
 public class ActiveMQManager {
 
+	private String serverIP;
 	private String mqueueName;
 	private Receiver receiver;
     private ConsolePanel consolePanel;
+	private TaskUnpacker taskUnpacker;
+	private RequestAnalyst requestAnalyst;
+	private Sender sdr;
 
-    public ActiveMQManager() {
+	public ActiveMQManager() {
 	}
 
 	public void init(String queueName) {
 		this.mqueueName = queueName;
 		receiver = new Receiver();
+		requestAnalyst = new RequestAnalyst();
+		requestAnalyst.init();
+		receiver.setServerIP(serverIP);
 		receiver.setQueueName(queueName);
-		receiver.init();
+		receiver.setRequestAnalyst(requestAnalyst);
+		receiver.setSender(sdr);
         receiver.setConsolePanel(consolePanel);
+		receiver.init();
 		Thread receiverThread = new Thread(receiver);
 		receiverThread.start();
 	}
@@ -40,4 +51,12 @@ public class ActiveMQManager {
     public void setConsolePanel(ConsolePanel consolePanel) {
         this.consolePanel = consolePanel;
     }
+
+	public void setServerIP(String serverIP) {
+		this.serverIP = serverIP;
+	}
+
+	public void setSender(Sender sdr) {
+		this.sdr = sdr;
+	}
 }
