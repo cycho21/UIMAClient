@@ -7,8 +7,6 @@ import kr.ac.uos.ai.annotator.controller.EventAnalyst;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 /**
  * @author Chan Yeon, Cho
@@ -254,12 +252,27 @@ public class GUIManager {
         this.sdr = sdr;
     }
 
-    public String makeInputIPDialog() {
-        String serverIP = jOptionPane.showInputDialog(null, "Input UIMA Server IP", "UIMA Management Ver. 0.0.1",
+    public String[] makeInputIPDialog() {
+        String[] stringArray = new String[2];
+        JTextField devField = new JTextField(10);
+        JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BorderLayout());
+        myPanel.add(new JLabel("Developer Name :"), BorderLayout.NORTH);
+        myPanel.add(devField);
+        myPanel.add(new JLabel("Server IP :"), BorderLayout.SOUTH);
+
+        String serverIP = jOptionPane.showInputDialog(null, myPanel, "UIMA Management Ver. 0.0.1",
                 JOptionPane.INFORMATION_MESSAGE);
-        if(serverIP==null) {
-            return "localhost";
+
+        stringArray[0] = serverIP;
+        stringArray[1] = devField.getText();
+
+        if(serverIP==null || serverIP.equals("")) {
+            stringArray[0] = "localhost";
+            stringArray[1] = "unnamedDev";
+            return stringArray;
         }
-        return serverIP;
+
+        return stringArray;
     }
 }

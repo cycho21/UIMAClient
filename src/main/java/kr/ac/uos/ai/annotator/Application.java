@@ -39,7 +39,7 @@ public class Application {
     }
 
     private void setActiveMQ() {
-        serverIP = guiManager.makeInputIPDialog();
+        serverIP = guiManager.makeInputIPDialog()[0];
     }
 
     private void go() {
