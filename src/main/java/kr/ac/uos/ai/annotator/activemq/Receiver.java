@@ -47,16 +47,14 @@ public class Receiver implements Runnable {
         try {
             while (true) {
                 consume();
-
                 if (message.getObjectProperty("msgType").equals("uploadSeq")) {
                     TextMessage msg = (TextMessage) message;
                     if (msg != null) {
                         if (msg.getText().equals("completed")) {
                             consolePanel.printTextAndNewLine(" Completed");
                         }
-                        }
+                    }
                 } else {
-
                     BytesMessage tMsg = (BytesMessage) message;
                     byte[] bytes = new byte[(int) tMsg.getBodyLength()];
                     tMsg.readBytes(bytes);

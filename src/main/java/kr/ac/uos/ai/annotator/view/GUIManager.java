@@ -47,7 +47,7 @@ public class GUIManager {
             }
         } catch (Exception e) {
         }
-        font = new Font("CourierNew", Font.PLAIN, 16);
+        font = new Font("Courier New", Font.PLAIN, 16);
         jOptionPane = new JOptionPane();
 //        makeFrame();
 //        makePanels();

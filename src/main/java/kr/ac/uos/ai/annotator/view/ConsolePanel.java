@@ -20,8 +20,8 @@ public class ConsolePanel extends JPanel {
     }
 
     public void init() {
-        font = new Font("Verdana", Font.BOLD, 12);
-        textArea = new JTextArea(18, 97);
+        font = new Font("Courier New", Font.BOLD, 14);
+        textArea = new JTextArea(17, 145);
         textArea.setBackground(new Color(16, 78, 139));
         textArea.setForeground(Color.WHITE);
         textArea.setFont(font);
