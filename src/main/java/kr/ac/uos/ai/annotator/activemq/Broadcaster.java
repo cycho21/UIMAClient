@@ -68,7 +68,6 @@ public class Broadcaster {
             txtMsg.setText(message);
             txtMsg.setObjectProperty("msgType", "TEST");
             producer.send(txtMsg);
-            consolePanel.printTextAndNewLine("test go");
         } catch (JMSException e) {
             e.printStackTrace();
         }

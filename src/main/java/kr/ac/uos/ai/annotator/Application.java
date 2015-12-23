@@ -76,8 +76,8 @@ public class Application {
         sdr = new Sender();
         sdr.setServerIP(serverIP);
         sdr.setConsolePanel(guiManager.getConsolePanel());
-        sdr.createQueue("client2node");
         sdr.init();
+        sdr.createQueue("client2node");
         guiManager.getConsolePanel().printTextAndNewLine("Sender Initialization OK");
 
         eventAnalyst.setSender(sdr);
