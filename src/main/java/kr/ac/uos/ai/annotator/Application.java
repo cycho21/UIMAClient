@@ -61,7 +61,6 @@ public class Application {
     private void init() {
         tac = new TaskAchieverCore();
         tdc = new TaskDistributorCore();
-
         td = tdc.getTaskDistributor();
         tac.init();
         tdc.init();
