@@ -13,7 +13,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/Task.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/TaskInterface.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/Job.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/JobList.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/MsgType.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/RequestJob.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/bean/protocol/SendJob.java" charset="UTF-8" />

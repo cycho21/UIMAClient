@@ -15,7 +15,6 @@ public class Sender {
     private String serverIP;
 
     public Sender() {
-
     }
 
     public void createQueue(String queueName) {
@@ -71,7 +70,6 @@ public class Sender {
             message.setObjectProperty("msgType", simpleMsgType);
             message.setText(process);
             producer.send(message);
-
             message.clearBody();
             message.clearProperties();
         } catch (JMSException e) {

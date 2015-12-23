@@ -61,6 +61,19 @@ public class Broadcaster {
         }
     }
 
+    public void sendMessageTest(String message){
+        TextMessage txtMsg = null;
+        try {
+            txtMsg = session.createTextMessage();
+            txtMsg.setText(message);
+            txtMsg.setObjectProperty("msgType", "TEST");
+            producer.send(txtMsg);
+            consolePanel.printTextAndNewLine("test go");
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getConsumerID() {
         return consumerID;
     }

@@ -76,11 +76,12 @@ public class Application {
         sdr = new Sender();
         sdr.setServerIP(serverIP);
         sdr.setConsolePanel(guiManager.getConsolePanel());
+        sdr.createQueue("client2node");
         sdr.init();
         guiManager.getConsolePanel().printTextAndNewLine("Sender Initialization OK");
-        sdr.createQueue("client2node");
 
         eventAnalyst.setSender(sdr);
+        eventAnalyst.setBroadCaster(broadCaster);
 
         activemqManager.setConsolePanel(guiManager.getConsolePanel());
         activemqManager.setSender(sdr);

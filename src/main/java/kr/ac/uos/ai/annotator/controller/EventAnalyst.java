@@ -1,6 +1,8 @@
 package kr.ac.uos.ai.annotator.controller;
 
+import kr.ac.uos.ai.annotator.activemq.Broadcaster;
 import kr.ac.uos.ai.annotator.activemq.Sender;
+import kr.ac.uos.ai.annotator.bean.protocol.Protocol;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskPacker;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
 import kr.ac.uos.ai.annotator.view.CustomFrame;
@@ -25,6 +27,7 @@ public class EventAnalyst {
     private String comboBoxChose;
     private TaskPacker tp;
     private Sender sdr;
+    private Broadcaster broadCaster;
 
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
@@ -65,6 +68,10 @@ public class EventAnalyst {
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
+            case "test":
+                this.comboBoxChose = actionCommand;
+                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
+                break;
             default:
                 break;
         }
@@ -74,8 +81,13 @@ public class EventAnalyst {
     public void execute() {
         switch (comboBoxChose) {
             case "upload" :
+                Protocol protocol = new Protocol();
+
                 byte[] tempByte = tp.file2Byte(filePath);
-                sdr.sendMessage(tempByte, fileName);
+                broadCaster.sendMessage(tempByte, fileName, protocol);
+                break;
+            case "test" :
+                broadCaster.sendMessageTest("testtesttest");
                 break;
             default:
                 break;
@@ -88,5 +100,9 @@ public class EventAnalyst {
 
     public void setSender(Sender sdr) {
         this.sdr = sdr;
+    }
+
+    public void setBroadCaster(Broadcaster broadCaster) {
+        this.broadCaster = broadCaster;
     }
 }
