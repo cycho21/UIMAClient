@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/ActiveMQManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Broadcaster.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Receiver.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Sender.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/analyst/RequestAnalyst.java" charset="UTF-8" />

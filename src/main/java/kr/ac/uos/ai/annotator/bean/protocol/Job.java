@@ -10,8 +10,20 @@ public class Job {
 
     private String jobName;
     private String version;
+    private String jobSize;
     private String modifiedDate;
     private String developer;
+
+    public Job() {
+    }
+
+    public String getJobSize() {
+        return jobSize;
+    }
+
+    public void setJobSize(String jobSize) {
+        this.jobSize = jobSize;
+    }
 
     public String getJobName() {
         return jobName;

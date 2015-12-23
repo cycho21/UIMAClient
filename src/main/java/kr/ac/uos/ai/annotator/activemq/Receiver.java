@@ -54,18 +54,6 @@ public class Receiver implements Runnable {
                             consolePanel.printTextAndNewLine(" Completed");
                         }
                     }
-                } else {
-                    BytesMessage tMsg = (BytesMessage) message;
-                    byte[] bytes = new byte[(int) tMsg.getBodyLength()];
-                    tMsg.readBytes(bytes);
-
-                    makeFile(bytes, tMsg);
-
-                    for (int i = 0; i <= bytes.length; i++) {
-                        if (i == bytes.length) {
-                            sdr.sendMessage("uploadSeq", "completed");
-                        }
-                    }
                 }
             }
         } catch (Exception e) {
@@ -91,15 +79,6 @@ public class Receiver implements Runnable {
             } catch (JMSException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-
-    public void makeFile(byte[] bytes, BytesMessage tMsg) {
-        try {
-            taskUnpacker.makeFileFromByteArray(System.getProperty("user.dir") + "\\lib\\" + tMsg.getObjectProperty("FileName"), bytes);
-        } catch (JMSException e) {
-            e.printStackTrace();
         }
     }
 

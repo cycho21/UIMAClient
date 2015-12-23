@@ -1,6 +1,7 @@
 package kr.ac.uos.ai.annotator;
 
 import kr.ac.uos.ai.annotator.activemq.ActiveMQManager;
+import kr.ac.uos.ai.annotator.activemq.Broadcaster;
 import kr.ac.uos.ai.annotator.activemq.Sender;
 import kr.ac.uos.ai.annotator.controller.EventAnalyst;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskAchieverCore;
@@ -30,6 +31,7 @@ public class Application {
     private TaskAchieverCore tac;
     private TaskDistributorCore tdc;
     private EventAnalyst eventAnalyst;
+    private Broadcaster broadCaster;
 
     public Application() {
         go();
@@ -66,21 +68,27 @@ public class Application {
         activemqManager.setServerIP(serverIP);
         guiManager.getConsolePanel().printTextAndNewLine("Receiver Initialization OK");
 
+        broadCaster = new Broadcaster("basicTopicName", serverIP);
+        broadCaster.setConsolePanel(guiManager.getConsolePanel());
+        broadCaster.init();
+        guiManager.getConsolePanel().printTextAndNewLine("Broadcaster Initialization OK");
+
         sdr = new Sender();
         sdr.setServerIP(serverIP);
         sdr.setConsolePanel(guiManager.getConsolePanel());
         sdr.init();
         guiManager.getConsolePanel().printTextAndNewLine("Sender Initialization OK");
-        sdr.createQueue("testQueue2");
+        sdr.createQueue("client2node");
+
         eventAnalyst.setSender(sdr);
+
         activemqManager.setConsolePanel(guiManager.getConsolePanel());
         activemqManager.setSender(sdr);
-        activemqManager.init("testQueue2");          // This init method makes receiver and starts receiver
+        activemqManager.init("node2client");          // This init method makes receiver and starts receiver
 
         guiManager.getCustomFrame().addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
-
             }
 
             @Override
@@ -96,29 +104,25 @@ public class Application {
 
             @Override
             public void windowClosed(WindowEvent e) {
-
             }
 
             @Override
             public void windowIconified(WindowEvent e) {
-
             }
 
             @Override
             public void windowDeiconified(WindowEvent e) {
-
             }
 
             @Override
             public void windowActivated(WindowEvent e) {
-
             }
 
             @Override
             public void windowDeactivated(WindowEvent e) {
-
             }
         });
+
         guiManager.getConsolePanel().printTextAndNewLine("ActiveMQ Initialization OK");
     }
 
