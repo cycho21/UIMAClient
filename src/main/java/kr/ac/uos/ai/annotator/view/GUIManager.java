@@ -269,10 +269,11 @@ public class GUIManager {
 
         if(serverIP==null || serverIP.equals("")) {
             stringArray[0] = "localhost";
-            stringArray[1] = "unnamedDev";
-            return stringArray;
         }
 
+        if(devField.getText()==null || devField.getText().equals("")){
+            stringArray[1] = "unnamedDev";
+        }
         return stringArray;
     }
 }

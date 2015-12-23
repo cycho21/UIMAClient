@@ -68,6 +68,7 @@ public class Application {
         tp = tac.getPacker();
         eventAnalyst.setPacker(tp);
         eventAnalyst.setDevName(developerName);
+        System.out.println(developerName);
         activemqManager = new ActiveMQManager();
         activemqManager.setServerIP(serverIP);
         guiManager.getConsolePanel().printTextAndNewLine("Receiver Initialization OK");

@@ -1,5 +1,6 @@
 package kr.ac.uos.ai.annotator.activemq;
 
+import kr.ac.uos.ai.annotator.bean.protocol.Protocol;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -63,15 +64,17 @@ public class Sender {
         }
     }
 
-    public void sendMessage(String simpleMsgType, String process) {
+    public void sendMessage(Protocol protocol) {
         TextMessage message;
         try {
             message = session.createTextMessage();
-            message.setObjectProperty("msgType", simpleMsgType);
-            message.setText(process);
+            message.setObjectProperty("msgType", protocol.getMsgType());
+            message.setObjectProperty("jobName", protocol.getJob().getJobName());
+            message.setObjectProperty("jobSize", protocol.getJob().getJobSize());
+            message.setObjectProperty("version", protocol.getJob().getVersion());
+            message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
+            message.setObjectProperty("developer", protocol.getJob().getDeveloper());
             producer.send(message);
-            message.clearBody();
-            message.clearProperties();
         } catch (JMSException e) {
             e.printStackTrace();
         }

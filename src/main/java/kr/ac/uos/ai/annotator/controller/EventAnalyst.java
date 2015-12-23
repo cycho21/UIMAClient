@@ -25,6 +25,7 @@ public class EventAnalyst {
     private CustomChooser customChooser;
     private String filePath;
     private String fileName;
+    private String jobName;
     private String comboBoxChose;
     private TaskPacker tp;
     private Sender sdr;
@@ -66,6 +67,9 @@ public class EventAnalyst {
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
             case "sendJob":
+                JOptionPane jOptionPane = new JOptionPane();
+                jobName = jOptionPane.showInputDialog(null, "Input jobName", "UIMA Management Ver. 0.0.1",
+                        JOptionPane.INFORMATION_MESSAGE);
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
@@ -82,13 +86,17 @@ public class EventAnalyst {
     public void execute() {
         switch (comboBoxChose) {
             case "upload" :
-                System.out.println(filePath);
-                System.out.println(fileName);
                 Protocol protocol = new Protocol();
                 byte[] tempByte = tp.file2Byte(filePath);
                 protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName);
                 protocol.setMsgType("upload");
                 broadCaster.sendMessage(tempByte, fileName, protocol);
+                break;
+            case "sendJob" :
+                Protocol sendProtocol = new Protocol();
+                sendProtocol.makeProtocol(jobName, null, "1.0.0", devName);
+                sendProtocol.setMsgType("sendJob");
+                sdr.sendMessage(sendProtocol);
                 break;
             case "test" :
                 broadCaster.sendMessageTest("testtesttest");
