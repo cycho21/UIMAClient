@@ -19,6 +19,7 @@ import java.util.Locale;
 
 public class EventAnalyst {
 
+    private String devName;
     private ConsolePanel consolePanel;
     private CustomFrame customFrame;
     private CustomChooser customChooser;
@@ -32,7 +33,7 @@ public class EventAnalyst {
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
         this.consolePanel = consolePanel;
-        this.comboBoxChose = null;
+        this.comboBoxChose = "upload";
         this.filePath = null;
         this.fileName = null;
         JFileChooser.setDefaultLocale(Locale.US);
@@ -81,9 +82,12 @@ public class EventAnalyst {
     public void execute() {
         switch (comboBoxChose) {
             case "upload" :
+                System.out.println(filePath);
+                System.out.println(fileName);
                 Protocol protocol = new Protocol();
-
                 byte[] tempByte = tp.file2Byte(filePath);
+                protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName);
+                protocol.setMsgType("upload");
                 broadCaster.sendMessage(tempByte, fileName, protocol);
                 break;
             case "test" :
@@ -104,5 +108,9 @@ public class EventAnalyst {
 
     public void setBroadCaster(Broadcaster broadCaster) {
         this.broadCaster = broadCaster;
+    }
+
+    public void setDevName(String devName) {
+        this.devName = devName;
     }
 }

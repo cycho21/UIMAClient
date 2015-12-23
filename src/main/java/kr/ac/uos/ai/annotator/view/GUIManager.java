@@ -82,11 +82,11 @@ public class GUIManager {
     public void setMsgTypeComboBox() {
         comboBoxContents = new String[] {"upload", "getJobList", "requestJob", "sendJob", "test"};
         customComboBox = new CustomComboBox(comboBoxContents);
+        customComboBox.setSelectedItem("upload");
         customListener = new CustomListener(customComboBox);
         DefaultListCellRenderer defaultListCellRenderer = new DefaultListCellRenderer();
         defaultListCellRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
         customComboBox.setRenderer(defaultListCellRenderer);
-//        eventAnalyst = new EventAnalyst(customFrame, consolePanel);
         customListener.setEventAnalyst(eventAnalyst);
         customComboBox.setPreferredSize(new Dimension(Configuration.WIDTH, 50));
         customComboBox.setSelectedIndex(0);

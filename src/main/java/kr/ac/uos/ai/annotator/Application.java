@@ -32,6 +32,7 @@ public class Application {
     private TaskDistributorCore tdc;
     private EventAnalyst eventAnalyst;
     private Broadcaster broadCaster;
+    private String developerName;
 
     public Application() {
         go();
@@ -41,7 +42,9 @@ public class Application {
     }
 
     private void setActiveMQ() {
-        serverIP = guiManager.makeInputIPDialog()[0];
+        String[] stringArray = guiManager.makeInputIPDialog();
+        serverIP = stringArray[0];
+        developerName = stringArray[1];
     }
 
     private void go() {
@@ -64,6 +67,7 @@ public class Application {
         tdc.init();
         tp = tac.getPacker();
         eventAnalyst.setPacker(tp);
+        eventAnalyst.setDevName(developerName);
         activemqManager = new ActiveMQManager();
         activemqManager.setServerIP(serverIP);
         guiManager.getConsolePanel().printTextAndNewLine("Receiver Initialization OK");

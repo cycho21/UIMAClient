@@ -3,8 +3,6 @@ package kr.ac.uos.ai.annotator.analyst;
 import kr.ac.uos.ai.annotator.bean.Task;
 import kr.ac.uos.ai.annotator.bean.protocol.MsgType;
 
-import javax.jms.Message;
-
 /**
  * @author Chan Yeon, Cho
  * @version 0.0.1 - Snapshot
@@ -34,10 +32,6 @@ public class RequestAnalyst {
         } else {
             /* doNothing */
         }
-    }
-
-    public void injectTask(Message message) {
-        analysis(taskGenerator.genTask(message));
     }
 
     /**

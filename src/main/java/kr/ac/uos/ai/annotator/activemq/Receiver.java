@@ -52,7 +52,7 @@ public class Receiver implements Runnable {
                     TextMessage msg = (TextMessage) message;
                     if (msg != null) {
                         if (msg.getText().equals("completed")) {
-                            consolePanel.printTextAndNewLine("Completed");
+                            consolePanel.printTextAndNewLine("     ...Completed");
                         }
                     }
                 }

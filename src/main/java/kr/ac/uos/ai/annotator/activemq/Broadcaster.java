@@ -3,7 +3,6 @@ package kr.ac.uos.ai.annotator.activemq;
 import kr.ac.uos.ai.annotator.bean.protocol.Protocol;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.command.ActiveMQTopic;
 
 import javax.jms.*;
 
@@ -22,7 +21,7 @@ public class Broadcaster {
     private ConnectionFactory connectionFactory;
     private Connection connection;
     private Session session;
-    private ActiveMQTopic topic;
+    private Topic topic;
     private MessageProducer producer;
     private ConsolePanel consolePanel;
 
@@ -37,7 +36,7 @@ public class Broadcaster {
             connection = connectionFactory.createConnection();
             connection.start();
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            topic = new ActiveMQTopic(topicName);
+            topic = session.createTopic(topicName);
             producer = session.createProducer(topic);
         } catch (JMSException e) {
             e.printStackTrace();
@@ -46,23 +45,29 @@ public class Broadcaster {
 
     public void sendMessage(byte[] msg, String fileName, Protocol protocol) {
         try {
-            BytesMessage message = session.createBytesMessage();
-            message.writeBytes(msg) ;
-            message.setObjectProperty("msgType", protocol.getMsgType());
-            message.setObjectProperty("developer",protocol.getJob().getDeveloper());
-            message.setObjectProperty("jobName",protocol.getJob().getJobName());
-            message.setObjectProperty("modifiedDate",protocol.getJob().getModifiedDate());
-            message.setObjectProperty("version",protocol.getJob().getVersion());
-            message.setObjectProperty("FileName", fileName);
-            producer.send(message);
-            consolePanel.printTextAndNewLine("File Name : " + fileName);
+                BytesMessage message = session.createBytesMessage();
+                message.writeBytes(msg);
+                message.setObjectProperty("msgType", protocol.getMsgType());
+                message.setObjectProperty("developer", protocol.getJob().getDeveloper());
+                message.setObjectProperty("jobName", protocol.getJob().getJobName());
+                message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
+                message.setObjectProperty("version", protocol.getJob().getVersion());
+                message.setObjectProperty("FileName", fileName);
+                message.setObjectProperty("FileSize", protocol.getJob().getJobSize());
+                    if(fileName.contains("jar")){
+                        message.setObjectProperty("type", "jar");
+                    } else {
+                        message.setObjectProperty("type", "input");
+                    }
+                producer.send(message);
+            consolePanel.printText("File Uploading...     " + fileName);
         } catch (JMSException e) {
             e.printStackTrace();
         }
     }
 
     public void sendMessageTest(String message){
-        TextMessage txtMsg = null;
+        TextMessage txtMsg;
         try {
             txtMsg = session.createTextMessage();
             txtMsg.setText(message);

@@ -1,7 +1,5 @@
 package kr.ac.uos.ai.annotator.bean.protocol;
 
-import java.util.Date;
-
 /**
  * @author Chan Yeon, Cho
  * @version 0.0.1 - SnapShot
@@ -12,7 +10,7 @@ import java.util.Date;
 public class Protocol {
 
 
-    private MsgType msgType;
+    private String msgType;
     private Job job;
 
     public Protocol() {
@@ -28,11 +26,11 @@ public class Protocol {
         job.setDeveloper(developerName);
     }
 
-    public MsgType getMsgType() {
+    public String getMsgType() {
         return msgType;
     }
 
-    public void setMsgType(MsgType msgType) {
+    public void setMsgType(String msgType) {
         this.msgType = msgType;
     }
 
