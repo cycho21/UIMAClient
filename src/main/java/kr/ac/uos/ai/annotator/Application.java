@@ -67,7 +67,6 @@ public class Application {
         tp = tac.getPacker();
         eventAnalyst.setPacker(tp);
         eventAnalyst.setDevName(developerName);
-        System.out.println(developerName);
         activemqManager = new ActiveMQManager();
         activemqManager.setServerIP(serverIP);
         guiManager.getConsolePanel().printTextAndNewLine("Receiver Initialization OK");
@@ -81,7 +80,7 @@ public class Application {
         sdr.setServerIP(serverIP);
         sdr.setConsolePanel(guiManager.getConsolePanel());
         sdr.init();
-        sdr.createQueue("client2node");
+        sdr.createQueue("client2main");
         guiManager.getConsolePanel().printTextAndNewLine("Sender Initialization OK");
 
         eventAnalyst.setSender(sdr);

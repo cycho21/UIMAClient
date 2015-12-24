@@ -13,6 +13,7 @@ public class Job {
     private String jobSize;
     private String modifiedDate;
     private String developer;
+    private String fileName;
 
     public Job() {
     }
@@ -55,5 +56,13 @@ public class Job {
 
     public void setDeveloper(String developer) {
         this.developer = developer;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 }

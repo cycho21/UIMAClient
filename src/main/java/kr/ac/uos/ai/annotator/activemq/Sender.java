@@ -64,6 +64,24 @@ public class Sender {
         }
     }
 
+    public void sendMessage(byte[] msg, String fileName, Protocol protocol) {
+        try {
+            BytesMessage message = session.createBytesMessage();
+            message.writeBytes(msg);
+            message.setObjectProperty("msgType", protocol.getMsgType());
+            message.setObjectProperty("developer", protocol.getJob().getDeveloper());
+            message.setObjectProperty("jobName", protocol.getJob().getJobName());
+            message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
+            message.setObjectProperty("version", protocol.getJob().getVersion());
+            message.setObjectProperty("fileName", fileName);
+            message.setObjectProperty("fileSize", protocol.getJob().getJobSize());
+            producer.send(message);
+            consolePanel.printText("File Upload to main...     " + fileName);
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void sendMessage(Protocol protocol) {
         TextMessage message;
         try {
@@ -74,7 +92,9 @@ public class Sender {
             message.setObjectProperty("version", protocol.getJob().getVersion());
             message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
             message.setObjectProperty("developer", protocol.getJob().getDeveloper());
+            message.setObjectProperty("jobFileName", protocol.getJob().getFileName());
             producer.send(message);
+            consolePanel.printText("Add job request to server...     ");
         } catch (JMSException e) {
             e.printStackTrace();
         }

@@ -52,13 +52,8 @@ public class Broadcaster {
                 message.setObjectProperty("jobName", protocol.getJob().getJobName());
                 message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
                 message.setObjectProperty("version", protocol.getJob().getVersion());
-                message.setObjectProperty("FileName", fileName);
-                message.setObjectProperty("FileSize", protocol.getJob().getJobSize());
-                    if(fileName.contains("jar")){
-                        message.setObjectProperty("type", "jar");
-                    } else {
-                        message.setObjectProperty("type", "input");
-                    }
+                message.setObjectProperty("fileName", fileName);
+                message.setObjectProperty("fileSize", protocol.getJob().getJobSize());
                 producer.send(message);
             consolePanel.printText("File Uploading...     " + fileName);
         } catch (JMSException e) {

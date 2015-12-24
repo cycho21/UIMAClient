@@ -8,6 +8,7 @@ import kr.ac.uos.ai.annotator.view.ConsolePanel;
 import kr.ac.uos.ai.annotator.view.CustomFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Locale;
 
 /**
@@ -30,6 +31,7 @@ public class EventAnalyst {
     private TaskPacker tp;
     private Sender sdr;
     private Broadcaster broadCaster;
+    private String jobFileName;
 
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
@@ -68,10 +70,20 @@ public class EventAnalyst {
                 break;
             case "sendJob":
                 JOptionPane jOptionPane = new JOptionPane();
-                jobName = jOptionPane.showInputDialog(null, "Input jobName", "UIMA Management Ver. 0.0.1",
-                        JOptionPane.INFORMATION_MESSAGE);
-                this.comboBoxChose = actionCommand;
+                String[] stringArray = new String[2];
+                JTextField jobField = new JTextField(10);
+                JPanel myPanel = new JPanel();
+                myPanel.setLayout(new BorderLayout());
+                myPanel.add(new JLabel("Job Name :"), BorderLayout.NORTH);
+                myPanel.add(jobField);
+                myPanel.add(new JLabel("File Name :"), BorderLayout.SOUTH);
+
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
+                jobFileName = jOptionPane.showInputDialog(null, myPanel, "UIMA Management Ver. 0.0.1",
+                        JOptionPane.INFORMATION_MESSAGE);
+                jobName = jobField.getText();
+
+                this.comboBoxChose = actionCommand;
                 break;
             case "test":
                 this.comboBoxChose = actionCommand;
@@ -88,13 +100,17 @@ public class EventAnalyst {
             case "upload" :
                 Protocol protocol = new Protocol();
                 byte[] tempByte = tp.file2Byte(filePath);
-                protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName);
+                protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName, fileName);
                 protocol.setMsgType("upload");
-                broadCaster.sendMessage(tempByte, fileName, protocol);
+                if(fileName.contains("jar")){
+                    broadCaster.sendMessage(tempByte, fileName, protocol);
+                } else {
+                    sdr.sendMessage(tempByte, fileName, protocol);
+                }
                 break;
             case "sendJob" :
                 Protocol sendProtocol = new Protocol();
-                sendProtocol.makeProtocol(jobName, null, "1.0.0", devName);
+                sendProtocol.makeProtocol(jobName, null, "1.0.0", devName, jobFileName);
                 sendProtocol.setMsgType("sendJob");
                 sdr.sendMessage(sendProtocol);
                 break;

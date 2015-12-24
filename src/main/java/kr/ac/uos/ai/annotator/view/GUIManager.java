@@ -268,7 +268,7 @@ public class GUIManager {
         stringArray[1] = devField.getText();
 
         if(serverIP==null || serverIP.equals("")) {
-            stringArray[0] = "localhost";
+            stringArray[0] = "211.109.9.71";
         }
 
         if(devField.getText()==null || devField.getText().equals("")){

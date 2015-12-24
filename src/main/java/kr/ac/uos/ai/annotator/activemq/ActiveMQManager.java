@@ -13,6 +13,7 @@ public class ActiveMQManager {
 	private TaskUnpacker taskUnpacker;
 	private RequestAnalyst requestAnalyst;
 	private Sender sdr;
+	private Receiver mainReceiver;
 
 	public ActiveMQManager() {
 	}
@@ -30,6 +31,16 @@ public class ActiveMQManager {
 		receiver.init();
 		Thread receiverThread = new Thread(receiver);
 		receiverThread.start();
+
+		mainReceiver = new Receiver();
+		mainReceiver.setServerIP(serverIP);
+		mainReceiver.setQueueName("main2client");
+		mainReceiver.setRequestAnalyst(requestAnalyst);
+		mainReceiver.setSender(sdr);
+		mainReceiver.setConsolePanel(consolePanel);
+		mainReceiver.init();
+		Thread receiverThread2 = new Thread(mainReceiver);
+		receiverThread2.start();
 	}
 
 	public String getMqueueName() {

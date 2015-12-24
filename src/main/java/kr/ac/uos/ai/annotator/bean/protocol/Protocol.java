@@ -16,7 +16,7 @@ public class Protocol {
     public Protocol() {
     }
 
-    public void makeProtocol(String jobName, String jobSize, String version, String developerName) {
+    public void makeProtocol(String jobName, String jobSize, String version, String developerName, String fileName) {
         String modifiedTime = String.valueOf(System.currentTimeMillis());
         job = new Job();
         job.setJobName(jobName);
@@ -24,6 +24,7 @@ public class Protocol {
         job.setVersion(version);
         job.setModifiedDate(modifiedTime);
         job.setDeveloper(developerName);
+        job.setFileName(fileName);
     }
 
     public String getMsgType() {
