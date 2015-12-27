@@ -47,6 +47,7 @@ public class Broadcaster {
         try {
                 BytesMessage message = session.createBytesMessage();
                 message.writeBytes(msg);
+                message.setObjectProperty("type", "jar");
                 message.setObjectProperty("msgType", protocol.getMsgType());
                 message.setObjectProperty("developer", protocol.getJob().getDeveloper());
                 message.setObjectProperty("jobName", protocol.getJob().getJobName());
@@ -103,5 +104,17 @@ public class Broadcaster {
 
     public void setConsolePanel(ConsolePanel consolePanel) {
         this.consolePanel = consolePanel;
+    }
+
+    public void sendMessage(String runAnnotator, String annoFileName) {
+        TextMessage txtMsg;
+        try {
+            txtMsg = session.createTextMessage();
+            txtMsg.setObjectProperty("msgType", runAnnotator);
+            txtMsg.setObjectProperty("fileName", annoFileName);
+            producer.send(txtMsg);
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
     }
 }

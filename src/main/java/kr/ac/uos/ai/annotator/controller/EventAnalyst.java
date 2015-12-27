@@ -32,6 +32,7 @@ public class EventAnalyst {
     private Sender sdr;
     private Broadcaster broadCaster;
     private String jobFileName;
+    private String annoFileName;
 
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
@@ -100,6 +101,18 @@ public class EventAnalyst {
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
+            case "runAnnotator":
+                JOptionPane jAOptionPane = new JOptionPane();
+                JPanel myAPanel = new JPanel();
+                myAPanel.setLayout(new BorderLayout());
+                myAPanel.add(new JLabel("Annotator File Name (with .jar) :"), BorderLayout.SOUTH);
+
+                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
+                annoFileName = jAOptionPane.showInputDialog(null, myAPanel, "UIMA Management Ver. 0.0.1",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                this.comboBoxChose = actionCommand;
+                break;
             default:
                 break;
         }
@@ -133,6 +146,9 @@ public class EventAnalyst {
                 break;
             case "test" :
                 broadCaster.sendMessageTest("testtesttest");
+                break;
+            case "runAnnotator":
+                broadCaster.sendMessage("annoRun", annoFileName);
                 break;
             default:
                 break;
