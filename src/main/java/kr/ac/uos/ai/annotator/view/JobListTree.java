@@ -20,13 +20,16 @@ public class JobListTree extends JPanel {
     private JTree jTree;
     private JScrollPane scrollPane;
     private DefaultTreeModel model;
+    private Font font;
 
     public JobListTree() {
     }
 
     public void init() {
+        font = new Font("Courier New", Font.BOLD, 14);
         rootNode = new DefaultMutableTreeNode("Job List");
         jTree = new JTree(rootNode);
+        jTree.setFont(font);
         scrollPane = new JScrollPane(jTree);
         scrollPane.setPreferredSize(new Dimension(Configuration.WIDTH / 3 - 40, 200));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -38,18 +41,17 @@ public class JobListTree extends JPanel {
     public void repaintTree() {
         model = (DefaultTreeModel) jTree.getModel();
         System.out.println("OK");
-        System.out.println(JobList.getJobList().size());
-        System.out.println(JobList.getJobList().get("1").getVersion());
+        System.out.println(JobList.getJobList().keySet());
         for (int i = 0; i<JobList.getJobList().size(); i++){
-            DefaultMutableTreeNode tempTree = new DefaultMutableTreeNode(JobList.getJobList().get(i+1).getJobName().toString());
-            tempTree.add(new DefaultMutableTreeNode(JobList.getJobList().get(i+1).getDeveloper().toString()));
-            tempTree.add(new DefaultMutableTreeNode(JobList.getJobList().get(i+1).getJobSize().toString()));
-            tempTree.add(new DefaultMutableTreeNode(JobList.getJobList().get(i+1).getModifiedDate().toString()));
-            tempTree.add(new DefaultMutableTreeNode(JobList.getJobList().get(i+1).getVersion().toString()));
+            DefaultMutableTreeNode tempTree = new DefaultMutableTreeNode("Job Name  : " + JobList.getJobList().get(String.valueOf(i)).getJobName().toString());
+            tempTree.add(new DefaultMutableTreeNode(                     "Developer : " + JobList.getJobList().get(String.valueOf(i)).getDeveloper().toString()));
+            tempTree.add(new DefaultMutableTreeNode(                     "Job Size  : " + JobList.getJobList().get(String.valueOf(i)).getJobSize().toString() + " KB"));
+            tempTree.add(new DefaultMutableTreeNode(                     "Modified  : " + JobList.getJobList().get(String.valueOf(i)).getModifiedDate().toString()));
+            tempTree.add(new DefaultMutableTreeNode(                     "Version   : " + JobList.getJobList().get(String.valueOf(i)).getVersion().toString()));
             rootNode.add(tempTree);
         }
 
         model.reload();
-
+        JobList.getJobList().clear();
     }
 }
