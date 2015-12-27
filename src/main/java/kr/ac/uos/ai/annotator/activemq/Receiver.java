@@ -56,6 +56,9 @@ public class Receiver implements Runnable {
                         }
                     }
                 }
+                        if (message.getObjectProperty("msgType").equals("callBack")){
+                            consolePanel.printTextAndNewLine("     ...Completed");
+                        }
             }
         } catch (Exception e) {
             System.out.println("Receiver Run Error");

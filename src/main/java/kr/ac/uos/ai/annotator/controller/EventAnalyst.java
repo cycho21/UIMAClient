@@ -65,12 +65,23 @@ public class EventAnalyst {
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
             case "requestJob":
+                JOptionPane jrOptionPane = new JOptionPane();
+                JTextField jobRField = new JTextField(10);
+                JPanel myRPanel = new JPanel();
+                myRPanel.setLayout(new BorderLayout());
+                myRPanel.add(new JLabel("Job Name :"), BorderLayout.NORTH);
+                myRPanel.add(jobRField);
+                myRPanel.add(new JLabel("File Name :"), BorderLayout.SOUTH);
+
+                jobFileName = jrOptionPane.showInputDialog(null, myRPanel, "UIMA Management Ver. 0.0.1",
+                        JOptionPane.INFORMATION_MESSAGE);
+                jobName = jobRField.getText();
+
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
             case "sendJob":
                 JOptionPane jOptionPane = new JOptionPane();
-                String[] stringArray = new String[2];
                 JTextField jobField = new JTextField(10);
                 JPanel myPanel = new JPanel();
                 myPanel.setLayout(new BorderLayout());
@@ -113,6 +124,12 @@ public class EventAnalyst {
                 sendProtocol.makeProtocol(jobName, null, "1.0.0", devName, jobFileName);
                 sendProtocol.setMsgType("sendJob");
                 sdr.sendMessage(sendProtocol);
+                break;
+            case "requestJob" :
+                Protocol requestProtocol = new Protocol();
+                requestProtocol.makeProtocol(jobName, null, "1.0.0", devName, jobFileName);
+                requestProtocol.setMsgType("requestJob");
+                sdr.sendMessage(requestProtocol);
                 break;
             case "test" :
                 broadCaster.sendMessageTest("testtesttest");

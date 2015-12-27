@@ -93,8 +93,8 @@ public class Sender {
             message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
             message.setObjectProperty("developer", protocol.getJob().getDeveloper());
             message.setObjectProperty("jobFileName", protocol.getJob().getFileName());
-            producer.send(message);
             consolePanel.printText("Add job request to server...     ");
+            producer.send(message);
         } catch (JMSException e) {
             e.printStackTrace();
         }

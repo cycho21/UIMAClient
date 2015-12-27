@@ -31,6 +31,7 @@ public class GUIManager {
     private EventAnalyst eventAnalyst;
     private Sender sdr;
     private JOptionPane jOptionPane;
+    private Sender sender;
 
     public GUIManager() {
     }
@@ -142,10 +143,6 @@ public class GUIManager {
         customFrame.setBackground(Color.WHITE);
         customFrame.setResizable(false);
         customFrame.setDefaultCloseOperation(CustomFrame.DO_NOTHING_ON_CLOSE);
-    }
-
-    public void setSender(Sender sdr) {
-        this.sdr = sdr;
     }
 
     public CustomListener getCustomListener() {
@@ -275,5 +272,9 @@ public class GUIManager {
             stringArray[1] = "unnamedDev";
         }
         return stringArray;
+    }
+
+    public void setSender(Sender sender) {
+        this.sender = sender;
     }
 }
