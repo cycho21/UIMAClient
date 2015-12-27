@@ -1,8 +1,12 @@
 package kr.ac.uos.ai.annotator.activemq;
 
 import kr.ac.uos.ai.annotator.analyst.RequestAnalyst;
+import kr.ac.uos.ai.annotator.bean.JobList;
+import kr.ac.uos.ai.annotator.bean.protocol.Job;
+import kr.ac.uos.ai.annotator.controller.EventAnalyst;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskUnpacker;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
+import kr.ac.uos.ai.annotator.view.JobListTree;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
@@ -23,6 +27,8 @@ public class Receiver implements Runnable {
     private String serverIP;
     private TaskUnpacker unPacker;
     private Sender sdr;
+    private JobListTree tree;
+    private EventAnalyst eventAnalyst;
 
     public Receiver() {
     }
@@ -61,6 +67,16 @@ public class Receiver implements Runnable {
                         }
                 if (message.getObjectProperty("msgType").equals("requestJob")){
                     consolePanel.printTextAndNewLine("     ...Executed");
+                }
+
+                if (message.getObjectProperty("msgType").equals("callBack")){
+                    Job tempJob = new Job();
+                    tempJob.setJobSize(message.getObjectProperty("jobSize").toString());
+                    tempJob.setDeveloper(message.getObjectProperty("developer").toString());
+                    tempJob.setVersion(message.getObjectProperty("version").toString());
+                    tempJob.setModifiedDate(message.getObjectProperty("modifiedDate").toString());
+                    tempJob.setJobName(message.getObjectProperty("jobName").toString());
+                    JobList.getJobList().put(String.valueOf(JobList.getJobList().size()), tempJob);
                 }
             }
         } catch (Exception e) {
@@ -125,5 +141,9 @@ public class Receiver implements Runnable {
 
     public void setSender(Sender sdr) {
         this.sdr = sdr;
+    }
+
+    public void setEventAnalyst(EventAnalyst eventAnalyst) {
+        this.eventAnalyst = eventAnalyst;
     }
 }

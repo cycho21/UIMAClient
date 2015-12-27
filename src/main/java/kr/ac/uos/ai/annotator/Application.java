@@ -56,6 +56,7 @@ public class Application {
         guiManager.setEventAnalyst(eventAnalyst);
         guiManager.setSender(sdr);
         guiManager.init();
+        eventAnalyst.setTree(guiManager.getJobListTree());
     }
 
     private void init() {
@@ -88,7 +89,9 @@ public class Application {
 
         activemqManager.setConsolePanel(guiManager.getConsolePanel());
         activemqManager.setSender(sdr);
+        activemqManager.setTree(guiManager.getJobListTree());
         activemqManager.init("node2client");          // This init method makes receiver and starts receiver
+        activemqManager.getReceiver().setEventAnalyst(eventAnalyst);
 
         guiManager.getCustomFrame().addWindowListener(new WindowListener() {
             @Override

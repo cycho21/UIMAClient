@@ -82,6 +82,18 @@ public class Sender {
         }
     }
 
+    public void sendMessage(String getJobList){
+        TextMessage message;
+        try {
+            message = session.createTextMessage();
+            message.setObjectProperty("msgType", "getJobList");
+            consolePanel.printText("Request Job List to server...     ");
+            producer.send(message);
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void sendMessage(Protocol protocol) {
         TextMessage message;
         try {
@@ -94,6 +106,24 @@ public class Sender {
             message.setObjectProperty("developer", protocol.getJob().getDeveloper());
             message.setObjectProperty("jobFileName", protocol.getJob().getFileName());
             consolePanel.printText("Add job request to server...     ");
+            producer.send(message);
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMessage2(Protocol protocol) {
+        TextMessage message;
+        try {
+            message = session.createTextMessage();
+            message.setObjectProperty("msgType", protocol.getMsgType());
+            message.setObjectProperty("jobName", protocol.getJob().getJobName());
+            message.setObjectProperty("jobSize", protocol.getJob().getJobSize());
+            message.setObjectProperty("version", protocol.getJob().getVersion());
+            message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
+            message.setObjectProperty("developer", protocol.getJob().getDeveloper());
+            message.setObjectProperty("jobFileName", protocol.getJob().getFileName());
+            consolePanel.printText("Request executing job to server...     ");
             producer.send(message);
         } catch (JMSException e) {
             e.printStackTrace();

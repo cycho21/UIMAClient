@@ -6,6 +6,7 @@ import kr.ac.uos.ai.annotator.bean.protocol.Protocol;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskPacker;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
 import kr.ac.uos.ai.annotator.view.CustomFrame;
+import kr.ac.uos.ai.annotator.view.JobListTree;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +34,7 @@ public class EventAnalyst {
     private Broadcaster broadCaster;
     private String jobFileName;
     private String annoFileName;
+    private JobListTree tree;
 
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
@@ -121,6 +123,9 @@ public class EventAnalyst {
 
     public void execute() {
         switch (comboBoxChose) {
+            case "getJobList":
+                makeTree();
+                break;
             case "upload" :
                 Protocol protocol = new Protocol();
                 byte[] tempByte = tp.file2Byte(filePath);
@@ -142,7 +147,7 @@ public class EventAnalyst {
                 Protocol requestProtocol = new Protocol();
                 requestProtocol.makeProtocol(jobName, null, "1.0.0", devName, jobFileName);
                 requestProtocol.setMsgType("requestJob");
-                sdr.sendMessage(requestProtocol);
+                sdr.sendMessage2(requestProtocol);
                 break;
             case "test" :
                 broadCaster.sendMessageTest("testtesttest");
@@ -153,6 +158,10 @@ public class EventAnalyst {
             default:
                 break;
         }
+    }
+
+    private void makeTree() {
+        tree.repaintTree();
     }
 
     public void setPacker(TaskPacker packer) {
@@ -170,4 +179,9 @@ public class EventAnalyst {
     public void setDevName(String devName) {
         this.devName = devName;
     }
+
+    public void setTree(JobListTree tree) {
+        this.tree = tree;
+    }
+
 }

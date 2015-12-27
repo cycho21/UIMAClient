@@ -3,6 +3,7 @@ package kr.ac.uos.ai.annotator.activemq;
 import kr.ac.uos.ai.annotator.analyst.RequestAnalyst;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskUnpacker;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
+import kr.ac.uos.ai.annotator.view.JobListTree;
 
 public class ActiveMQManager {
 
@@ -14,8 +15,9 @@ public class ActiveMQManager {
 	private RequestAnalyst requestAnalyst;
 	private Sender sdr;
 	private Receiver mainReceiver;
+    private JobListTree tree;
 
-	public ActiveMQManager() {
+    public ActiveMQManager() {
 	}
 
 	public void init(String queueName) {
@@ -70,4 +72,8 @@ public class ActiveMQManager {
 	public void setSender(Sender sdr) {
 		this.sdr = sdr;
 	}
+
+    public void setTree(JobListTree tree) {
+        this.tree = tree;
+    }
 }

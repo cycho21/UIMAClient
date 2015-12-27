@@ -32,6 +32,7 @@ public class GUIManager {
     private Sender sdr;
     private JOptionPane jOptionPane;
     private Sender sender;
+    private JobListTree jobListTree;
 
     public GUIManager() {
     }
@@ -54,10 +55,13 @@ public class GUIManager {
         setSecondComboBox();
         setBorderLayout();
         setTopBorderLayout();
+        setJobListLayOut();
         setListener();
 
         customFrame.add(customPanel, BorderLayout.CENTER);
         customFrame.add(consolePanel, BorderLayout.SOUTH);
+        customFrame.add(jobListTree, BorderLayout.EAST);
+        customFrame.setBackground(Color.WHITE);
         customFrame.pack();
         customFrame.setVisible(true);
 
@@ -66,6 +70,11 @@ public class GUIManager {
          */
         consolePanel.getTextArea().setEditable(false);
         consolePanel.printTextAndNewLine("GUI Initialization OK");
+    }
+
+    private void setJobListLayOut() {
+        jobListTree = new JobListTree();
+        jobListTree.init();
     }
 
     private void setListener() {
@@ -89,24 +98,24 @@ public class GUIManager {
         defaultListCellRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
         customComboBox.setRenderer(defaultListCellRenderer);
         customListener.setEventAnalyst(eventAnalyst);
-        customComboBox.setPreferredSize(new Dimension(Configuration.WIDTH, 50));
+        customComboBox.setPreferredSize(new Dimension((Configuration.WIDTH/3)*2, 60));
         customComboBox.setSelectedIndex(0);
         customComboBox.setFont(font);
     }
 
     private void setTopBorderLayout() {
         serverButton = new JButton("Get Resource From UIMA Server");
-        serverButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        serverButton.setPreferredSize(new Dimension(Configuration.WIDTH / 3, 60));
         serverButton.setFont(font);
         nodeButton = new JButton("Get Resource From UIMA Node");
-        nodeButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        nodeButton.setPreferredSize(new Dimension(Configuration.WIDTH / 3, 60));
         nodeButton.setFont(font);
 
         runButton = new JButton("Run");
-        runButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        runButton.setPreferredSize(new Dimension(Configuration.WIDTH / 3, 60));
         runButton.setFont(font);
         fileImportButton = new JButton("Choose File from File System");
-        fileImportButton.setPreferredSize(new Dimension(Configuration.WIDTH / 2, 50));
+        fileImportButton.setPreferredSize(new Dimension(Configuration.WIDTH / 3, 60));
         fileImportButton.setFont(font);
 
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -132,7 +141,7 @@ public class GUIManager {
     public void makePanels() {
         customPanel = new CustomPanel();
         customPanel.setBackground(Color.WHITE);
-        customPanel.setPreferredSize(new Dimension(Configuration.WIDTH, Configuration.HEIGHT - 200));
+        customPanel.setPreferredSize(new Dimension((Configuration.WIDTH/3)*2, Configuration.HEIGHT - 200));
         consolePanel = new ConsolePanel();
         consolePanel.setPreferredSize(new Dimension(Configuration.WIDTH, 300));
         consolePanel.init();
@@ -276,5 +285,13 @@ public class GUIManager {
 
     public void setSender(Sender sender) {
         this.sender = sender;
+    }
+
+    public JobListTree getJobListTree() {
+        return jobListTree;
+    }
+
+    public void setJobListTree(JobListTree jobListTree) {
+        this.jobListTree = jobListTree;
     }
 }
