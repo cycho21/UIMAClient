@@ -10,8 +10,6 @@ import kr.ac.uos.ai.annotator.view.JobListTree;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 public class Receiver implements Runnable {
@@ -47,6 +45,7 @@ public class Receiver implements Runnable {
     private void consume() {
         try {
             message = consumer.receive();
+            System.out.println(message);
         } catch (JMSException e) {
             e.printStackTrace();
         }
@@ -88,7 +87,6 @@ public class Receiver implements Runnable {
 
                     if (message.getObjectProperty("type").equals("end")){
                         consolePanel.printTextAndNewLine("     ...Completed");
-                        tree.repaintTree();
                         tree.repaintTree();
                     }
 

@@ -69,6 +69,7 @@ public class Application {
         eventAnalyst.setPacker(tp);
         eventAnalyst.setDevName(developerName);
         activemqManager = new ActiveMQManager();
+        activemqManager.setTree(guiManager.getJobListTree());
         activemqManager.setServerIP(serverIP);
         guiManager.getConsolePanel().printTextAndNewLine("Receiver Initialization OK");
 
@@ -89,7 +90,6 @@ public class Application {
 
         activemqManager.setConsolePanel(guiManager.getConsolePanel());
         activemqManager.setSender(sdr);
-        activemqManager.setTree(guiManager.getJobListTree());
         activemqManager.init("node2client");          // This init method makes receiver and starts receiver
         activemqManager.getReceiver().setEventAnalyst(eventAnalyst);
 

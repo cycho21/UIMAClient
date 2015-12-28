@@ -49,7 +49,7 @@ public class JobListTree extends JPanel {
             rootNode.add(tempTree);
         }
 
-        JobList.getJobList().clear();
         model.reload();
+        JobList.getJobList().clear();
     }
 }
