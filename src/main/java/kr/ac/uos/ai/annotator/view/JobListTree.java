@@ -43,6 +43,7 @@ public class JobListTree extends JPanel {
         for (int i = 0; i<JobList.getJobList().size(); i++){
             DefaultMutableTreeNode tempTree = new DefaultMutableTreeNode("Job Name  : " + JobList.getJobList().get(String.valueOf(i)).getJobName().toString());
             tempTree.add(new DefaultMutableTreeNode(                     "Developer : " + JobList.getJobList().get(String.valueOf(i)).getDeveloper().toString()));
+            tempTree.add(new DefaultMutableTreeNode(                     "File Name : " + JobList.getJobList().get(String.valueOf(i)).getFileName().toString()));
             tempTree.add(new DefaultMutableTreeNode(                     "Job Size  : " + JobList.getJobList().get(String.valueOf(i)).getJobSize().toString() + " KB"));
             tempTree.add(new DefaultMutableTreeNode(                     "Modified  : " + JobList.getJobList().get(String.valueOf(i)).getModifiedDate().toString()));
             tempTree.add(new DefaultMutableTreeNode(                     "Version   : " + JobList.getJobList().get(String.valueOf(i)).getVersion().toString()));
