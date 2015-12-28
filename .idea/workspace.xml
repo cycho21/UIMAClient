@@ -7,8 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9480f812-3a23-43a0-a200-3a2d703aeab1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Receiver.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Receiver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Sender.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Sender.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="UIMAClient.iws" />
@@ -937,7 +935,7 @@
       <workItem from="1451221492560" duration="390000" />
       <workItem from="1451222041738" duration="6475000" />
       <workItem from="1451230761250" duration="9128000" />
-      <workItem from="1451319195180" duration="8934000" />
+      <workItem from="1451319195180" duration="9051000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1450621964528</created>
@@ -1071,11 +1069,17 @@
       <option name="project" value="LOCAL" />
       <updated>1451324941954</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="half">
+      <created>1451330677755</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1451330677755</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106232000" />
+    <option name="totallyTimeSpent" value="106349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="-8" width="1696" height="1026" extended-state="6" />
