@@ -66,6 +66,10 @@ public class Receiver implements Runnable {
                     }
                 }
 
+                if (message.getObjectProperty("msgType").equals("anno")){
+                    consolePanel.printTextAndNewLine("     ...Completed");
+                }
+
                 if (message.getObjectProperty("msgType").equals("callBack")){
                     consolePanel.printTextAndNewLine(message.getObjectProperty("text").toString());
                 }
