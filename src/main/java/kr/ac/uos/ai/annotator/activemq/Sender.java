@@ -104,7 +104,7 @@ public class Sender {
             message.setObjectProperty("version", protocol.getJob().getVersion());
             message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
             message.setObjectProperty("developer", protocol.getJob().getDeveloper());
-            message.setObjectProperty("jobFileName", protocol.getJob().getFileName());
+            message.setObjectProperty("fileName", protocol.getJob().getFileName());
             consolePanel.printText("Add job request to server...     ");
             producer.send(message);
         } catch (JMSException e) {
@@ -122,6 +122,7 @@ public class Sender {
             message.setObjectProperty("version", protocol.getJob().getVersion());
             message.setObjectProperty("modifiedDate", protocol.getJob().getModifiedDate());
             message.setObjectProperty("developer", protocol.getJob().getDeveloper());
+            message.setObjectProperty("fileName", protocol.getJob().getFileName());
             message.setObjectProperty("jobFileName", protocol.getJob().getFileName());
             consolePanel.printText("Request executing job to server...     ");
             producer.send(message);

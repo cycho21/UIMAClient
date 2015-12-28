@@ -67,7 +67,7 @@ public class Receiver implements Runnable {
                 }
 
                 if (message.getObjectProperty("msgType").equals("callBack")){
-                    consolePanel.printTextAndNewLine("     ..." + message.getObjectProperty("text").toString());
+                    consolePanel.printTextAndNewLine(message.getObjectProperty("text").toString());
                 }
 
                 if (message.getObjectProperty("msgType").equals("requestJob")){
@@ -82,6 +82,7 @@ public class Receiver implements Runnable {
                         tempJob.setVersion(message.getObjectProperty("version").toString());
                         tempJob.setModifiedDate(message.getObjectProperty("modifiedDate").toString());
                         tempJob.setJobName(message.getObjectProperty("jobName").toString());
+                        tempJob.setFileName(message.getObjectProperty("fileName").toString());
                         JobList.getJobList().put(String.valueOf(JobList.getJobList().size()), tempJob);
                     }
 
