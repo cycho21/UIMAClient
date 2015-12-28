@@ -49,8 +49,6 @@ public class GUIManager {
         }
         font = new Font("Courier New", Font.PLAIN, 16);
         jOptionPane = new JOptionPane();
-//        makeFrame();
-//        makePanels();
         setMsgTypeComboBox();
         setSecondComboBox();
         setBorderLayout();

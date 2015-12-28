@@ -112,7 +112,7 @@ public class EventAnalyst {
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 annoFileName = jAOptionPane.showInputDialog(null, myAPanel, "UIMA Management Ver. 0.0.1",
                         JOptionPane.INFORMATION_MESSAGE);
-
+                System.out.println(annoFileName);
                 this.comboBoxChose = actionCommand;
                 break;
             default:
@@ -124,6 +124,7 @@ public class EventAnalyst {
     public void execute() {
         switch (comboBoxChose) {
             case "getJobList":
+                sdr.sendMessage("getJobList");
                 makeTree();
                 break;
             case "upload" :

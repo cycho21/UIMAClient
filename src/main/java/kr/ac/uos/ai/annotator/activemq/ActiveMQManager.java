@@ -30,6 +30,7 @@ public class ActiveMQManager {
 		receiver.setRequestAnalyst(requestAnalyst);
 		receiver.setSender(sdr);
         receiver.setConsolePanel(consolePanel);
+		receiver.setTree(tree);
 		receiver.init();
 		Thread receiverThread = new Thread(receiver);
 		receiverThread.start();

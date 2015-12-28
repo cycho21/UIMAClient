@@ -86,7 +86,7 @@ public class Sender {
         TextMessage message;
         try {
             message = session.createTextMessage();
-            message.setObjectProperty("msgType", "getJobList");
+            message.setObjectProperty("msgType", getJobList);
             consolePanel.printText("Request Job List to server...     ");
             producer.send(message);
         } catch (JMSException e) {

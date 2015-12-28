@@ -40,8 +40,6 @@ public class JobListTree extends JPanel {
 
     public void repaintTree() {
         model = (DefaultTreeModel) jTree.getModel();
-        System.out.println("OK");
-        System.out.println(JobList.getJobList().keySet());
         for (int i = 0; i<JobList.getJobList().size(); i++){
             DefaultMutableTreeNode tempTree = new DefaultMutableTreeNode("Job Name  : " + JobList.getJobList().get(String.valueOf(i)).getJobName().toString());
             tempTree.add(new DefaultMutableTreeNode(                     "Developer : " + JobList.getJobList().get(String.valueOf(i)).getDeveloper().toString()));
@@ -51,7 +49,7 @@ public class JobListTree extends JPanel {
             rootNode.add(tempTree);
         }
 
-        model.reload();
         JobList.getJobList().clear();
+        model.reload();
     }
 }

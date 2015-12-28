@@ -28,6 +28,10 @@ public class JobList {
         return jobList;
     }
 
+    public static void setJobList(HashMap<String, Job> jobList) {
+        JobList.jobList = jobList;
+    }
+
     private JobList() {
     }
 }

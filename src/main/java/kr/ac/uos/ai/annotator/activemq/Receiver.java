@@ -10,6 +10,9 @@ import kr.ac.uos.ai.annotator.view.JobListTree;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 
 public class Receiver implements Runnable {
 
@@ -44,7 +47,6 @@ public class Receiver implements Runnable {
     private void consume() {
         try {
             message = consumer.receive();
-            System.out.println(message);
         } catch (JMSException e) {
             e.printStackTrace();
         }
@@ -54,29 +56,49 @@ public class Receiver implements Runnable {
         try {
             while (true) {
                 consume();
+
                 if (message.getObjectProperty("msgType").equals("uploadSeq")) {
                     TextMessage msg = (TextMessage) message;
                     if (msg != null) {
-                        if (msg.getText().equals("completed")) {
+                        System.out.println(message);
+                        if (msg.getObjectProperty("text").equals("completed")) {
                             consolePanel.printTextAndNewLine("     ...Completed");
                         }
                     }
                 }
-                        if (message.getObjectProperty("msgType").equals("callBack")){
-                            consolePanel.printTextAndNewLine("     ...Completed");
-                        }
+
+                if (message.getObjectProperty("msgType").equals("callBack")){
+                    consolePanel.printTextAndNewLine("     ..." + message.getObjectProperty("text").toString());
+                }
+
                 if (message.getObjectProperty("msgType").equals("requestJob")){
                     consolePanel.printTextAndNewLine("     ...Executed");
                 }
 
-                if (message.getObjectProperty("msgType").equals("callBack")){
-                    Job tempJob = new Job();
-                    tempJob.setJobSize(message.getObjectProperty("jobSize").toString());
-                    tempJob.setDeveloper(message.getObjectProperty("developer").toString());
-                    tempJob.setVersion(message.getObjectProperty("version").toString());
-                    tempJob.setModifiedDate(message.getObjectProperty("modifiedDate").toString());
-                    tempJob.setJobName(message.getObjectProperty("jobName").toString());
-                    JobList.getJobList().put(String.valueOf(JobList.getJobList().size()), tempJob);
+                if (message.getObjectProperty("msgType").equals("getJobs")){
+                    if(message.getObjectProperty("type").equals("do")){
+                        Job tempJob = new Job();
+                        tempJob.setJobSize(message.getObjectProperty("jobSize").toString());
+                        tempJob.setDeveloper(message.getObjectProperty("developer").toString());
+                        tempJob.setVersion(message.getObjectProperty("version").toString());
+                        tempJob.setModifiedDate(message.getObjectProperty("modifiedDate").toString());
+                        tempJob.setJobName(message.getObjectProperty("jobName").toString());
+                        JobList.getJobList().put(String.valueOf(JobList.getJobList().size()), tempJob);
+                    }
+
+                    if (message.getObjectProperty("type").equals("end")){
+                        consolePanel.printTextAndNewLine("     ...Completed");
+                        tree.repaintTree();
+                        tree.repaintTree();
+                    }
+
+                }
+
+                if (message.getObjectProperty("msgType").equals("jobList")) {
+                    MapMessage mapMsg = (MapMessage) message;
+                    HashMap<String, Job> jobMap = (HashMap) mapMsg.getObject("jobMap");
+                    JobList.setJobList(jobMap);
+                    tree.repaintTree();
                 }
             }
         } catch (Exception e) {
@@ -145,5 +167,9 @@ public class Receiver implements Runnable {
 
     public void setEventAnalyst(EventAnalyst eventAnalyst) {
         this.eventAnalyst = eventAnalyst;
+    }
+
+    public void setTree(JobListTree tree) {
+        this.tree = tree;
     }
 }
