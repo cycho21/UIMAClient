@@ -61,13 +61,17 @@ public class Receiver implements Runnable {
                     if (msg != null) {
                         System.out.println(message);
                         if (msg.getObjectProperty("text").equals("completed")) {
-                            consolePanel.printTextAndNewLine("     ...Completed");
+                            if(msg.getObjectProperty("ip")!=null){
+                                consolePanel.printTextAndNewLine("     ...Upload Annotator to " + message.getObjectProperty("ip") + " is Completed");
+                            } else {
+                                consolePanel.printTextAndNewLine("     ...Completed");
+                            }
                         }
                     }
                 }
 
                 if (message.getObjectProperty("msgType").equals("anno")){
-                    consolePanel.printTextAndNewLine("     ...Completed");
+                    consolePanel.printTextAndNewLine("     " + message.getObjectProperty("ip") + " 's Annotator is Starting...");
                 }
 
                 if (message.getObjectProperty("msgType").equals("callBack")){

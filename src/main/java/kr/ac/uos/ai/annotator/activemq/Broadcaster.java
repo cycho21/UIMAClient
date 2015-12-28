@@ -56,7 +56,7 @@ public class Broadcaster {
                 message.setObjectProperty("fileName", fileName);
                 message.setObjectProperty("fileSize", protocol.getJob().getJobSize());
                 producer.send(message);
-            consolePanel.printText("File Uploading...     " + fileName);
+            consolePanel.printTextAndNewLine("File Uploading...     " + fileName);
         } catch (JMSException e) {
             e.printStackTrace();
         }
