@@ -71,7 +71,7 @@ public class Receiver implements Runnable {
                 }
 
                 if (message.getObjectProperty("msgType").equals("anno")){
-                    consolePanel.printTextAndNewLine("     " + message.getObjectProperty("ip") + " 's Annotator is Starting...");
+                    consolePanel.printTextAndNewLine("     ..." + message.getObjectProperty("ip") + "'s Annotator is Starting...");
                 }
 
                 if (message.getObjectProperty("msgType").equals("callBack")){

@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9480f812-3a23-43a0-a200-3a2d703aeab1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Broadcaster.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Broadcaster.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Receiver.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Receiver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -105,8 +104,8 @@
       <file leaf-file-name="Receiver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Receiver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5461121" vertical-offset="1009" max-vertical-offset="3565">
-              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.37251356" vertical-offset="1151" max-vertical-offset="3565">
+              <caret line="73" column="101" selection-start-line="73" selection-start-column="101" selection-end-line="73" selection-end-column="101" />
               <folding />
             </state>
           </provider>
@@ -924,7 +923,7 @@
       <workItem from="1451221492560" duration="390000" />
       <workItem from="1451222041738" duration="6475000" />
       <workItem from="1451230761250" duration="9128000" />
-      <workItem from="1451319195180" duration="11165000" />
+      <workItem from="1451319195180" duration="11217000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1450621964528</created>
@@ -1076,11 +1075,17 @@
       <option name="project" value="LOCAL" />
       <updated>1451331136113</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="half">
+      <created>1451334651478</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1451334651478</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108463000" />
+    <option name="totallyTimeSpent" value="108515000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1602,8 +1607,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/activemq/Receiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5461121" vertical-offset="1009" max-vertical-offset="3565">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.37251356" vertical-offset="1151" max-vertical-offset="3565">
+          <caret line="73" column="101" selection-start-line="73" selection-start-column="101" selection-end-line="73" selection-end-column="101" />
           <folding />
         </state>
       </provider>
