@@ -12,9 +12,30 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class CustomChooser extends JFileChooser {
 
     public CustomChooser() {
-        setFileFilter(new FileNameExtensionFilter("Annotator", "jar"));
         setFileFilter(new FileNameExtensionFilter("Input", "txt"));
+        setFileFilter(new FileNameExtensionFilter("Annotator", "jar"));
         setMultiSelectionEnabled(false);
         setApproveButtonText("Select");
+    }
+
+    public void setting(String string){
+        switch (string) {
+            case "jar":
+                setFileFilter(new FileNameExtensionFilter("Annotator", "jar"));
+                setMultiSelectionEnabled(false);
+                setApproveButtonText("Select");
+                break;
+            case "input":
+                setFileFilter(new FileNameExtensionFilter("Input File", "txt"));
+                setMultiSelectionEnabled(false);
+                setApproveButtonText("Select");
+                break;
+            default:
+                setFileFilter(new FileNameExtensionFilter("Input", "txt"));
+                setFileFilter(new FileNameExtensionFilter("Annotator", "jar"));
+                setMultiSelectionEnabled(false);
+                setApproveButtonText("Select");
+                break;
+        }
     }
 }

@@ -84,13 +84,27 @@ public class Sender {
 
     public void sendMessage(String getJobList){
         TextMessage message;
-        try {
-            message = session.createTextMessage();
-            message.setObjectProperty("msgType", getJobList);
-            consolePanel.printText("Request Job List to server...     ");
-            producer.send(message);
-        } catch (JMSException e) {
-            e.printStackTrace();
+        switch (getJobList){
+            case "getJobList":
+            try {
+                message = session.createTextMessage();
+                message.setObjectProperty("msgType", getJobList);
+                consolePanel.printText("Request Job List to server...     ");
+                producer.send(message);
+            } catch (JMSException e) {
+                e.printStackTrace();
+            }
+                break;
+            case "getNodeInfo":
+            try {
+                message = session.createTextMessage();
+                message.setObjectProperty("msgType", getJobList);
+                consolePanel.printText("Request Node List to server...     ");
+                producer.send(message);
+            } catch (JMSException e) {
+                e.printStackTrace();
+            }
+                break;
         }
     }
 

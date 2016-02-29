@@ -55,7 +55,6 @@ public class Receiver implements Runnable {
         try {
             while (true) {
                 consume();
-
                 if (message.getObjectProperty("msgType").equals("uploadSeq")) {
                     TextMessage msg = (TextMessage) message;
                     if (msg != null) {
@@ -98,7 +97,6 @@ public class Receiver implements Runnable {
                         consolePanel.printTextAndNewLine("     ...Completed");
                         tree.repaintTree();
                     }
-
                 }
 
                 if (message.getObjectProperty("msgType").equals("jobList")) {

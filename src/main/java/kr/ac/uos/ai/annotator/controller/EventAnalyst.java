@@ -54,11 +54,48 @@ public class EventAnalyst {
         }
     }
 
+    public void upLoad() {
+        Protocol protocol = new Protocol();
+        byte[] tempByte = tp.file2Byte(filePath);
+        protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName, fileName);
+        protocol.setMsgType("upload");
+        if(fileName.contains("jar")){
+            broadCaster.sendMessage(tempByte, fileName, protocol);
+        } else {
+            sdr.sendMessage(tempByte, fileName, protocol);
+        }
+    }
+
     public void firstCombo(String actionCommand) {
         /*
             "upload", "getJobList", "requestJob", "sendJob"
          */
         switch (actionCommand) {
+            case "SimpleProcess":
+                customChooser.setting("input");
+                if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
+                    filePath = customChooser.getSelectedFile().toString();
+                    fileName = customChooser.getSelectedFile().getName().toString();
+                    consolePanel.printTextAndNewLine("Input File Select : " + filePath);
+                }
+                upLoad();
+                customChooser.setting("jar");
+                if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
+                    filePath = customChooser.getSelectedFile().toString();
+                    fileName = customChooser.getSelectedFile().getName().toString();
+                    consolePanel.printTextAndNewLine("Annotator File Select : " + filePath);
+                }
+                upLoad();
+                customChooser.setting("jar");
+                if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
+                    filePath = customChooser.getSelectedFile().toString();
+                    fileName = customChooser.getSelectedFile().getName().toString();
+                    consolePanel.printTextAndNewLine("Annotator File Select : " + filePath);
+                }
+                upLoad();
+                this.comboBoxChose = actionCommand;
+                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
+                break;
             case "upload":
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
@@ -123,6 +160,9 @@ public class EventAnalyst {
 
     public void execute() {
         switch (comboBoxChose) {
+            case "SimpleProcess" :
+
+                break;
             case "getJobList":
                 sdr.sendMessage("getJobList");
                 makeTree();
@@ -155,6 +195,9 @@ public class EventAnalyst {
                 break;
             case "runAnnotator":
                 broadCaster.sendMessage("annoRun", annoFileName);
+                break;
+            case "getNodeInfo":
+                sdr.sendMessage("getNodeInfo");
                 break;
             default:
                 break;

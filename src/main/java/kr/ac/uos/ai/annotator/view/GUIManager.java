@@ -28,11 +28,10 @@ public class GUIManager {
     private String[] comboBoxContents;
     private CustomComboBox customComboBox;
     private Font font;
-    private EventAnalyst eventAnalyst;
     private Sender sdr;
     private JOptionPane jOptionPane;
-    private Sender sender;
     private JobListTree jobListTree;
+    private EventAnalyst eventAnalyst;
 
     public GUIManager() {
     }
@@ -88,7 +87,7 @@ public class GUIManager {
     }
 
     public void setMsgTypeComboBox() {
-        comboBoxContents = new String[] {"upload", "sendJob", "requestJob", "runAnnotator", "getJobList"};
+        comboBoxContents = new String[] {"upload", "sendJob", "requestJob", "runAnnotator", "getJobList", "getNodeInfo"};
         customComboBox = new CustomComboBox(comboBoxContents);
         customComboBox.setSelectedItem("upload");
         customListener = new CustomListener(customComboBox);
@@ -240,14 +239,6 @@ public class GUIManager {
         this.font = font;
     }
 
-    public EventAnalyst getEventAnalyst() {
-        return eventAnalyst;
-    }
-
-    public void setEventAnalyst(EventAnalyst eventAnalyst) {
-        this.eventAnalyst = eventAnalyst;
-    }
-
     public Sender getSdr() {
         return sdr;
     }
@@ -282,7 +273,7 @@ public class GUIManager {
     }
 
     public void setSender(Sender sender) {
-        this.sender = sender;
+        this.sdr = sender;
     }
 
     public JobListTree getJobListTree() {
@@ -291,5 +282,9 @@ public class GUIManager {
 
     public void setJobListTree(JobListTree jobListTree) {
         this.jobListTree = jobListTree;
+    }
+
+    public void setEventAnalyst(EventAnalyst eventAnalyst) {
+        this.eventAnalyst = eventAnalyst;
     }
 }
