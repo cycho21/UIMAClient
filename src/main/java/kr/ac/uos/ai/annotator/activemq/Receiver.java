@@ -1,6 +1,5 @@
 package kr.ac.uos.ai.annotator.activemq;
 
-import kr.ac.uos.ai.annotator.analyst.RequestAnalyst;
 import kr.ac.uos.ai.annotator.bean.JobList;
 import kr.ac.uos.ai.annotator.bean.protocol.Job;
 import kr.ac.uos.ai.annotator.controller.EventAnalyst;
@@ -23,7 +22,6 @@ public class Receiver implements Runnable {
     private Message message;
     private TextMessage tMsg;
     private TaskUnpacker taskUnpacker;
-    private RequestAnalyst requestAnalyst;
     private ConsolePanel consolePanel;
     private String serverIP;
     private TaskUnpacker unPacker;
@@ -115,8 +113,6 @@ public class Receiver implements Runnable {
     public void init() {
         taskUnpacker = new TaskUnpacker();
         taskUnpacker.setSender(sdr);
-        requestAnalyst = new RequestAnalyst();
-        requestAnalyst.init();
         if (serverIP == null) {
         } else {
             factory = new ActiveMQConnectionFactory("tcp://" + serverIP + ":61616");
@@ -160,10 +156,6 @@ public class Receiver implements Runnable {
         } catch (JMSException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setRequestAnalyst(RequestAnalyst requestAnalyst) {
-        this.requestAnalyst = requestAnalyst;
     }
 
     public void setSender(Sender sdr) {

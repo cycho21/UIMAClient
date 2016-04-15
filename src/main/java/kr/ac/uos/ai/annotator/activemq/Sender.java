@@ -105,6 +105,8 @@ public class Sender {
                 e.printStackTrace();
             }
                 break;
+            default:
+                break;
         }
     }
 

@@ -1,6 +1,5 @@
 package kr.ac.uos.ai.annotator.controller;
 
-import kr.ac.uos.ai.annotator.activemq.Broadcaster;
 import kr.ac.uos.ai.annotator.activemq.Sender;
 import kr.ac.uos.ai.annotator.bean.protocol.Protocol;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskPacker;
@@ -31,7 +30,6 @@ public class EventAnalyst {
     private String comboBoxChose;
     private TaskPacker tp;
     private Sender sdr;
-    private Broadcaster broadCaster;
     private String jobFileName;
     private String annoFileName;
     private JobListTree tree;
@@ -60,7 +58,7 @@ public class EventAnalyst {
         protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName, fileName);
         protocol.setMsgType("upload");
         if(fileName.contains("jar")){
-            broadCaster.sendMessage(tempByte, fileName, protocol);
+            sdr.sendMessage(tempByte, fileName, protocol);
         } else {
             sdr.sendMessage(tempByte, fileName, protocol);
         }
@@ -71,6 +69,10 @@ public class EventAnalyst {
             "upload", "getJobList", "requestJob", "sendJob"
          */
         switch (actionCommand) {
+
+            case "getNodeInfo":
+                break;
+
             case "SimpleProcess":
                 customChooser.setting("input");
                 if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
@@ -78,7 +80,6 @@ public class EventAnalyst {
                     fileName = customChooser.getSelectedFile().getName().toString();
                     consolePanel.printTextAndNewLine("Input File Select : " + filePath);
                 }
-                upLoad();
                 customChooser.setting("jar");
                 if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
                     filePath = customChooser.getSelectedFile().toString();
@@ -86,24 +87,27 @@ public class EventAnalyst {
                     consolePanel.printTextAndNewLine("Annotator File Select : " + filePath);
                 }
                 upLoad();
-                customChooser.setting("jar");
-                if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
-                    filePath = customChooser.getSelectedFile().toString();
-                    fileName = customChooser.getSelectedFile().getName().toString();
-                    consolePanel.printTextAndNewLine("Annotator File Select : " + filePath);
-                }
-                upLoad();
+
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
+
                 break;
+
             case "upload":
                 this.comboBoxChose = actionCommand;
+                filePath = customChooser.getSelectedFile().toString();
+                fileName = customChooser.getSelectedFile().getName().toString();
+
+                upLoad();
+
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
+
             case "getJobList":
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
+
             case "requestJob":
                 JOptionPane jrOptionPane = new JOptionPane();
                 JTextField jobRField = new JTextField(10);
@@ -120,38 +124,7 @@ public class EventAnalyst {
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
                 break;
-            case "sendJob":
-                JOptionPane jOptionPane = new JOptionPane();
-                JTextField jobField = new JTextField(10);
-                JPanel myPanel = new JPanel();
-                myPanel.setLayout(new BorderLayout());
-                myPanel.add(new JLabel("Job Name :"), BorderLayout.NORTH);
-                myPanel.add(jobField);
-                myPanel.add(new JLabel("File Name :"), BorderLayout.SOUTH);
 
-                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
-                jobFileName = jOptionPane.showInputDialog(null, myPanel, "UIMA Management Ver. 0.0.1",
-                        JOptionPane.INFORMATION_MESSAGE);
-                jobName = jobField.getText();
-
-                this.comboBoxChose = actionCommand;
-                break;
-            case "test":
-                this.comboBoxChose = actionCommand;
-                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
-                break;
-            case "runAnnotator":
-                JOptionPane jAOptionPane = new JOptionPane();
-                JPanel myAPanel = new JPanel();
-                myAPanel.setLayout(new BorderLayout());
-                myAPanel.add(new JLabel("Annotator File Name (with .jar) :"), BorderLayout.SOUTH);
-
-                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
-                annoFileName = jAOptionPane.showInputDialog(null, myAPanel, "UIMA Management Ver. 0.0.1",
-                        JOptionPane.INFORMATION_MESSAGE);
-                System.out.println(annoFileName);
-                this.comboBoxChose = actionCommand;
-                break;
             default:
                 break;
         }
@@ -160,45 +133,23 @@ public class EventAnalyst {
 
     public void execute() {
         switch (comboBoxChose) {
-            case "SimpleProcess" :
 
-                break;
             case "getJobList":
                 sdr.sendMessage("getJobList");
                 makeTree();
                 break;
-            case "upload" :
-                Protocol protocol = new Protocol();
-                byte[] tempByte = tp.file2Byte(filePath);
-                protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName, fileName);
-                protocol.setMsgType("upload");
-                if(fileName.contains("jar")){
-                    broadCaster.sendMessage(tempByte, fileName, protocol);
-                } else {
-                    sdr.sendMessage(tempByte, fileName, protocol);
-                }
-                break;
-            case "sendJob" :
-                Protocol sendProtocol = new Protocol();
-                sendProtocol.makeProtocol(jobName, null, "1.0.0", devName, jobFileName);
-                sendProtocol.setMsgType("sendJob");
-                sdr.sendMessage(sendProtocol);
-                break;
+
             case "requestJob" :
                 Protocol requestProtocol = new Protocol();
                 requestProtocol.makeProtocol(jobName, null, "1.0.0", devName, jobFileName);
                 requestProtocol.setMsgType("requestJob");
                 sdr.sendMessage2(requestProtocol);
                 break;
-            case "test" :
-                broadCaster.sendMessageTest("testtesttest");
-                break;
-            case "runAnnotator":
-                broadCaster.sendMessage("annoRun", annoFileName);
-                break;
+
             case "getNodeInfo":
                 sdr.sendMessage("getNodeInfo");
                 break;
+
             default:
                 break;
         }
@@ -214,10 +165,6 @@ public class EventAnalyst {
 
     public void setSender(Sender sdr) {
         this.sdr = sdr;
-    }
-
-    public void setBroadCaster(Broadcaster broadCaster) {
-        this.broadCaster = broadCaster;
     }
 
     public void setDevName(String devName) {
