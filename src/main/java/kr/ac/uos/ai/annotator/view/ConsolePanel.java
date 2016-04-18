@@ -34,7 +34,6 @@ public class ConsolePanel extends JPanel {
 
     public void printTextAndNewLine(String text) {
         textArea.append(text + "\n");
-//        scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
 

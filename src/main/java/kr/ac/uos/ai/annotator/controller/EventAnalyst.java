@@ -31,8 +31,8 @@ public class EventAnalyst {
     private TaskPacker tp;
     private Sender sdr;
     private String jobFileName;
-    private String annoFileName;
     private JobListTree tree;
+    private String fileExtension;
 
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
@@ -52,7 +52,7 @@ public class EventAnalyst {
         }
     }
 
-    public void upLoad() {
+    public void upLoad(String filePath, String fileName) {
         Protocol protocol = new Protocol();
         byte[] tempByte = tp.file2Byte(filePath);
         protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName, fileName);
@@ -73,34 +73,25 @@ public class EventAnalyst {
             case "getNodeInfo":
                 break;
 
-            case "SimpleProcess":
-                customChooser.setting("input");
-                if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
-                    filePath = customChooser.getSelectedFile().toString();
-                    fileName = customChooser.getSelectedFile().getName().toString();
-                    consolePanel.printTextAndNewLine("Input File Select : " + filePath);
-                }
-                customChooser.setting("jar");
-                if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
-                    filePath = customChooser.getSelectedFile().toString();
-                    fileName = customChooser.getSelectedFile().getName().toString();
-                    consolePanel.printTextAndNewLine("Annotator File Select : " + filePath);
-                }
-                upLoad();
-
-                this.comboBoxChose = actionCommand;
-                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
-
-                break;
-
             case "upload":
                 this.comboBoxChose = actionCommand;
-                filePath = customChooser.getSelectedFile().toString();
-                fileName = customChooser.getSelectedFile().getName().toString();
 
-                upLoad();
+                consolePanel.printTextAndNewLine("\n" + "msgType Choose : " + actionCommand);
 
-                consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
+                if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
+                    filePath = customChooser.getSelectedFile().toString();
+                    fileName = customChooser.getSelectedFile().getName().toString();
+                    fileExtension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+
+                    if(fileExtension.equals(".jar")) {
+                        consolePanel.printTextAndNewLine("Annotator File Select : " + filePath);
+                    } else {
+                        consolePanel.printTextAndNewLine("Input File Select : " + filePath);
+                    }
+                }
+
+//                upLoad(customChooser.getSelectedFile().toString(), customChooser.getSelectedFile().getName().toString());
+
                 break;
 
             case "getJobList":
@@ -133,6 +124,10 @@ public class EventAnalyst {
 
     public void execute() {
         switch (comboBoxChose) {
+
+            case "upload":
+                upLoad(filePath, fileName);
+                break;
 
             case "getJobList":
                 sdr.sendMessage("getJobList");

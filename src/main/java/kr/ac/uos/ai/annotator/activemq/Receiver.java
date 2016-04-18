@@ -59,7 +59,7 @@ public class Receiver implements Runnable {
                         System.out.println(message);
                         if (msg.getObjectProperty("text").equals("completed")) {
                             if(msg.getObjectProperty("ip")!=null){
-                                consolePanel.printTextAndNewLine("     ...Upload Annotator to " + message.getObjectProperty("ip") + " is Completed");
+                                consolePanel.printTextAndNewLine("     ...Upload Annotator to main ");
                             } else {
                                 consolePanel.printTextAndNewLine("     ...Completed");
                             }
