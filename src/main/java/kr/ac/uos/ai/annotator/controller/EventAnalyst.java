@@ -58,7 +58,7 @@ public class EventAnalyst {
         protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName, fileName);
         protocol.setMsgType("upload");
         if(fileName.contains("jar")){
-            sdr.sendMessage(tempByte, fileName, protocol);
+            sdr.sendMessage(tempByte, fileName, protocol);               
         } else {
             sdr.sendMessage(tempByte, fileName, protocol);
         }
@@ -89,8 +89,6 @@ public class EventAnalyst {
                         consolePanel.printTextAndNewLine("Input File Select : " + filePath);
                     }
                 }
-
-//                upLoad(customChooser.getSelectedFile().toString(), customChooser.getSelectedFile().getName().toString());
 
                 break;
 
