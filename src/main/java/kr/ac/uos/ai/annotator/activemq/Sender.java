@@ -64,6 +64,19 @@ public class Sender {
         }
     }
 
+    public void sendMessage(String msgType, String msgTxt) {
+        TextMessage message;
+        try {
+            message = session.createTextMessage();
+            message.setObjectProperty("msgType", msgType);
+            message.setObjectProperty("fileName", msgTxt);
+            producer.send(message);
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+        consolePanel.printText("Add Initial Annotator to server...     ");
+    }
+
     public void sendMessage(byte[] msg, String fileName, Protocol protocol) {
         try {
             BytesMessage message = session.createBytesMessage();

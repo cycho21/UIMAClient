@@ -20,6 +20,7 @@ import java.util.Locale;
 
 public class EventAnalyst {
 
+    private JOptionPane jOptionPane;
     private String devName;
     private ConsolePanel consolePanel;
     private CustomFrame customFrame;
@@ -33,6 +34,7 @@ public class EventAnalyst {
     private String jobFileName;
     private JobListTree tree;
     private String fileExtension;
+    private String annotatorFileName;
 
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
@@ -42,6 +44,7 @@ public class EventAnalyst {
         this.fileName = null;
         JFileChooser.setDefaultLocale(Locale.US);
         customChooser = new CustomChooser();
+        jOptionPane = new JOptionPane();
     }
 
     public void importFile() {
@@ -57,6 +60,7 @@ public class EventAnalyst {
         byte[] tempByte = tp.file2Byte(filePath);
         protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName, fileName);
         protocol.setMsgType("upload");
+
         if(fileName.contains("jar")){
             sdr.sendMessage(tempByte, fileName, protocol);               
         } else {
@@ -69,6 +73,15 @@ public class EventAnalyst {
             "upload", "getJobList", "requestJob", "sendJob"
          */
         switch (actionCommand) {
+
+            case "setInitialAnnotator":
+                this.comboBoxChose = actionCommand;
+
+                consolePanel.printTextAndNewLine("\n" + "msgType Choose : " + actionCommand);
+
+                annotatorFileName = jOptionPane.showInputDialog(null, "Put Annotator File Name",
+                        JOptionPane.INFORMATION_MESSAGE);
+                break;
 
             case "getNodeInfo":
                 break;
@@ -122,27 +135,25 @@ public class EventAnalyst {
 
     public void execute() {
         switch (comboBoxChose) {
-
+            case "setInitialAnnotator":
+                sdr.sendMessage("initialAnnotator", annotatorFileName);
+                break;
             case "upload":
                 upLoad(filePath, fileName);
                 break;
-
             case "getJobList":
                 sdr.sendMessage("getJobList");
                 makeTree();
                 break;
-
             case "requestJob" :
                 Protocol requestProtocol = new Protocol();
                 requestProtocol.makeProtocol(jobName, null, "1.0.0", devName, jobFileName);
                 requestProtocol.setMsgType("requestJob");
                 sdr.sendMessage2(requestProtocol);
                 break;
-
             case "getNodeInfo":
                 sdr.sendMessage("getNodeInfo");
                 break;
-
             default:
                 break;
         }

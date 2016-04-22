@@ -87,7 +87,7 @@ public class GUIManager {
     }
 
     public void setMsgTypeComboBox() {
-        comboBoxContents = new String[] {"upload", "requestJob", "getJobList", "getNodeInfo"};
+        comboBoxContents = new String[] {"upload", "requestJob", "getJobList", "getNodeInfo", "setInitialAnnotator"};
         customComboBox = new CustomComboBox(comboBoxContents);
         customComboBox.setSelectedItem("upload");
         customListener = new CustomListener(customComboBox);
