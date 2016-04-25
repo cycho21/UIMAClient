@@ -62,9 +62,42 @@ public class EventAnalyst {
         protocol.setMsgType("upload");
 
         if(fileName.contains("jar")){
+            makeMetaData();
             sdr.sendMessage(tempByte, fileName, protocol);               
         } else {
             sdr.sendMessage(tempByte, fileName, protocol);
+        }
+    }
+
+    private void makeMetaData() {
+        String[] stringArray = new String[2];
+        JTextField devField = new JTextField(10);
+        JTextField nameField = new JTextField(10);
+        JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BorderLayout());
+        myPanel.add(new JLabel("Developer Name :"), BorderLayout.NORTH);
+        myPanel.add(devField);
+        myPanel.add(new JLabel("Annotator Name :"), BorderLayout.NORTH);
+        myPanel.add(nameField);
+        myPanel.add(new JLabel("Annotator Ver :"), BorderLayout.SOUTH);
+
+        String version = jOptionPane.showInputDialog(null, myPanel, "UIMA Management Ver. 1.0.1",
+                JOptionPane.INFORMATION_MESSAGE);
+
+        stringArray[0] = version;
+        stringArray[1] = devField.getText();
+        stringArray[2] = nameField.getText();
+
+        if(version==null || devField.getText().equals("")){
+            stringArray[1] = "unnamedDev";
+        }
+
+        if(devField.getText()==null || devField.getText().equals("")){
+            stringArray[1] = "unnamedDev";
+        }
+
+        if(devField.getText()==null || devField.getText().equals("")){
+            stringArray[1] = "unnamedDev";
         }
     }
 
