@@ -15,8 +15,10 @@ class AnnotatorInfo {
     private String version;
     private String author;
     private String name;
+    private String modifiedDate;
 
     public AnnotatorInfo(){
+        this.modifiedDate = String.valueOf(System.currentTimeMillis());
     }
 
 }

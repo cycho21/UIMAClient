@@ -10,4 +10,5 @@ package kr.ac.uos.ai.annotator.configure;
 public class Configuration {
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 370;
+    public static final String[] stringArray = new String[2];
 }

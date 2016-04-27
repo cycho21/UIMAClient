@@ -9,7 +9,6 @@ package kr.ac.uos.ai.annotator.bean.protocol;
 
 public class Protocol {
 
-
     private String msgType;
     private Job job;
 

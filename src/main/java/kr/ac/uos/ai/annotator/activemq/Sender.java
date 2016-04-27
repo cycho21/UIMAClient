@@ -1,5 +1,6 @@
 package kr.ac.uos.ai.annotator.activemq;
 
+import kr.ac.uos.ai.annotator.bean.protocol.AnnotatorInfo;
 import kr.ac.uos.ai.annotator.bean.protocol.Protocol;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -176,5 +177,22 @@ public class Sender {
 
     public void setServerIP(String serverIP) {
         this.serverIP = serverIP;
+    }
+
+    public void uploadMessage(byte[] tempByte, String fileName, AnnotatorInfo annotatorInfo) {
+        try {
+            BytesMessage message = session.createBytesMessage();
+            message.writeBytes(tempByte);
+            message.setObjectProperty("msgType", "UPLOAD");
+            message.setObjectProperty("annotatorName", annotatorInfo.getName());
+            message.setObjectProperty("version", annotatorInfo.getVersion());
+            message.setObjectProperty("fileName", fileName);
+            message.setObjectProperty("modifiedDate", annotatorInfo.getModifiedDate());
+            message.setObjectProperty("author", annotatorInfo.getAuthor());
+            producer.send(message);
+            consolePanel.printText("File Upload to main...     " + fileName);
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -249,7 +249,6 @@ public class GUIManager {
     }
 
     public String[] makeInputIPDialog() {
-        String[] stringArray = new String[2];
         JTextField devField = new JTextField(10);
         JPanel myPanel = new JPanel();
         myPanel.setLayout(new BorderLayout());
@@ -260,17 +259,17 @@ public class GUIManager {
         String serverIP = jOptionPane.showInputDialog(null, myPanel, "UIMA Management Ver. 0.0.1",
                 JOptionPane.INFORMATION_MESSAGE);
 
-        stringArray[0] = serverIP;
-        stringArray[1] = devField.getText();
+        Configuration.stringArray[0] = serverIP;
+        Configuration.stringArray[1] = devField.getText();
 
         if(serverIP==null || serverIP.equals("")) {
-            stringArray[0] = "211.109.9.71";
+            Configuration.stringArray[0] = "211.109.9.71";
         }
 
         if(devField.getText()==null || devField.getText().equals("")){
-            stringArray[1] = "unnamedDev";
+            Configuration.stringArray[1] = "unnamedDev";
         }
-        return stringArray;
+        return Configuration.stringArray;
     }
 
     public void setSender(Sender sender) {

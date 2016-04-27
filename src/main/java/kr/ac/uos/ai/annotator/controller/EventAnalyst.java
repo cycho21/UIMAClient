@@ -1,7 +1,9 @@
 package kr.ac.uos.ai.annotator.controller;
 
 import kr.ac.uos.ai.annotator.activemq.Sender;
+import kr.ac.uos.ai.annotator.bean.protocol.AnnotatorInfo;
 import kr.ac.uos.ai.annotator.bean.protocol.Protocol;
+import kr.ac.uos.ai.annotator.configure.Configuration;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskPacker;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
 import kr.ac.uos.ai.annotator.view.CustomFrame;
@@ -56,49 +58,46 @@ public class EventAnalyst {
     }
 
     public void upLoad(String filePath, String fileName) {
-        Protocol protocol = new Protocol();
+        AnnotatorInfo annotatorInfo = new AnnotatorInfo();
+
+        annotatorInfo.setAuthor(Configuration.stringArray[1]);      // annotator's author name
+
+        String[] stringArray = makeMetaData();
+
+        annotatorInfo.setName(stringArray[0]);      // annotator's name
+        annotatorInfo.setVersion(stringArray[1]);       // annotator's version
+
         byte[] tempByte = tp.file2Byte(filePath);
-        protocol.makeProtocol(fileName, String.valueOf(tempByte.length), "1.0.0", devName, fileName);
-        protocol.setMsgType("upload");
 
         if(fileName.contains("jar")){
-            makeMetaData();
-            sdr.sendMessage(tempByte, fileName, protocol);               
+            sdr.uploadMessage(tempByte, fileName, annotatorInfo);
         } else {
-            sdr.sendMessage(tempByte, fileName, protocol);
+            sdr.uploadMessage(tempByte, fileName, annotatorInfo);
         }
     }
 
-    private void makeMetaData() {
+    private String[] makeMetaData() {
         String[] stringArray = new String[2];
-        JTextField devField = new JTextField(10);
-        JTextField nameField = new JTextField(10);
+        JTextField annoField = new JTextField(10);
         JPanel myPanel = new JPanel();
         myPanel.setLayout(new BorderLayout());
-        myPanel.add(new JLabel("Developer Name :"), BorderLayout.NORTH);
-        myPanel.add(devField);
         myPanel.add(new JLabel("Annotator Name :"), BorderLayout.NORTH);
-        myPanel.add(nameField);
+        myPanel.add(annoField);
         myPanel.add(new JLabel("Annotator Ver :"), BorderLayout.SOUTH);
-
         String version = jOptionPane.showInputDialog(null, myPanel, "UIMA Management Ver. 1.0.1",
                 JOptionPane.INFORMATION_MESSAGE);
 
-        stringArray[0] = version;
-        stringArray[1] = devField.getText();
-        stringArray[2] = nameField.getText();
+        stringArray[0] = annoField.getText();
+        stringArray[1] = version;
 
-        if(version==null || devField.getText().equals("")){
-            stringArray[1] = "unnamedDev";
+        if(annoField.getText()==null || annoField.getText().equals("")){
+            stringArray[0] = "unnamedAnnotator";
         }
 
-        if(devField.getText()==null || devField.getText().equals("")){
-            stringArray[1] = "unnamedDev";
+        if(version==null || version.equals("")){
+            stringArray[1] = "1.0.0";
         }
-
-        if(devField.getText()==null || devField.getText().equals("")){
-            stringArray[1] = "unnamedDev";
-        }
+        return stringArray;
     }
 
     public void firstCombo(String actionCommand) {
@@ -128,14 +127,12 @@ public class EventAnalyst {
                     filePath = customChooser.getSelectedFile().toString();
                     fileName = customChooser.getSelectedFile().getName().toString();
                     fileExtension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-
                     if(fileExtension.equals(".jar")) {
                         consolePanel.printTextAndNewLine("Annotator File Select : " + filePath);
                     } else {
                         consolePanel.printTextAndNewLine("Input File Select : " + filePath);
                     }
                 }
-
                 break;
 
             case "getJobList":
