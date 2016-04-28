@@ -106,6 +106,12 @@ public class EventAnalyst {
          */
         switch (actionCommand) {
 
+            case "getAnnotatorList":
+                this.comboBoxChose = actionCommand;
+                consolePanel.printText("\n" + "msgType Choose : " + actionCommand);
+                consolePanel.printTextAndNewLine("\n" + "Request annotator list to server ...");
+                break;
+
             case "setInitialAnnotator":
                 this.comboBoxChose = actionCommand;
 
@@ -155,6 +161,7 @@ public class EventAnalyst {
 
                 this.comboBoxChose = actionCommand;
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
+
                 break;
 
             default:
@@ -165,6 +172,9 @@ public class EventAnalyst {
 
     public void execute() {
         switch (comboBoxChose) {
+            case "getAnnotatorList":
+                sdr.sendMessage("getAnnotatorList", null);
+                break;
             case "setInitialAnnotator":
                 sdr.sendMessage("initialAnnotator", annotatorFileName);
                 break;
