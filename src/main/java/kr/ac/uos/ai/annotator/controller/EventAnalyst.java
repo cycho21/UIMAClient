@@ -106,6 +106,11 @@ public class EventAnalyst {
          */
         switch (actionCommand) {
 
+            case "makeJob":
+                this.comboBoxChose = actionCommand;
+                consolePanel.printText("\n" + "msgType Choose : " + actionCommand);
+                break;
+
             case "getAnnotatorList":
                 this.comboBoxChose = actionCommand;
                 consolePanel.printText("\n" + "msgType Choose : " + actionCommand);
@@ -172,6 +177,10 @@ public class EventAnalyst {
 
     public void execute() {
         switch (comboBoxChose) {
+            case "makeJob":
+                makeJob();
+                break;
+
             case "getAnnotatorList":
                 sdr.sendMessage("getAnnotatorList", null);
                 break;
@@ -197,6 +206,13 @@ public class EventAnalyst {
             default:
                 break;
         }
+    }
+
+    private String[] makeJob() {
+
+        sdr.sendMessage("getJobList");
+
+        return jobStringArray;
     }
 
     private void makeTree() {

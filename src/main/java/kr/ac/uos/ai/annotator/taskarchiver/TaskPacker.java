@@ -90,12 +90,18 @@ public class TaskPacker {
 
 
     public byte[] file2Byte(String jarPath) {
+
 		Path path = Paths.get(jarPath);
+
 		try {
-			data = Files.readAllBytes(path);
+
+				data = Files.readAllBytes(path);
 		} catch (IOException e) {
+
 			e.printStackTrace();
+
 		}
+
 		return data;
 	}
 
