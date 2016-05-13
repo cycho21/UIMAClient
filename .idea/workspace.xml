@@ -6,10 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9480f812-3a23-43a0-a200-3a2d703aeab1" name="Default" comment="04/29">
+    <list default="true" id="9480f812-3a23-43a0-a200-3a2d703aeab1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/EventAnalyst.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/EventAnalyst.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/view/GUIManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/taskarchiver/TaskPacker.java" afterPath="$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/taskarchiver/TaskPacker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="UIMAClient.iws" />
@@ -47,9 +45,11 @@
       <file leaf-file-name="EventAnalyst.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/EventAnalyst.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3957307">
-              <caret line="219" column="5" selection-start-line="219" selection-start-column="5" selection-end-line="219" selection-end-column="5" />
-              <folding />
+            <state vertical-scroll-proportion="0.4909688">
+              <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -992,7 +992,7 @@
       <workItem from="1461558456014" duration="30037000" />
       <workItem from="1462164325773" duration="9422000" />
       <workItem from="1462865937343" duration="959000" />
-      <workItem from="1462930027514" duration="10302000" />
+      <workItem from="1462930027514" duration="13762000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1450621964528</created>
@@ -1192,11 +1192,17 @@
       <option name="project" value="LOCAL" />
       <updated>1462168820468</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="05/12">
+      <created>1463043926109</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1463043926109</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="250069000" />
+    <option name="totallyTimeSpent" value="253529000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1288,7 +1294,8 @@
     <MESSAGE value="04/27" />
     <MESSAGE value="04/28" />
     <MESSAGE value="04/29" />
-    <option name="LAST_COMMIT_MESSAGE" value="04/29" />
+    <MESSAGE value="05/12" />
+    <option name="LAST_COMMIT_MESSAGE" value="05/12" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1385,7 +1392,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1734,9 +1743,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/kr/ac/uos/ai/annotator/controller/EventAnalyst.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3957307">
-          <caret line="219" column="5" selection-start-line="219" selection-start-column="5" selection-end-line="219" selection-end-column="5" />
-          <folding />
+        <state vertical-scroll-proportion="0.4909688">
+          <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -209,6 +209,9 @@ public class EventAnalyst {
     }
 
     private String[] makeJob() {
+        sdr.sendMessage("getAnnotatorList", null);
+
+
 
         sdr.sendMessage("getJobList");
 
