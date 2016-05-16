@@ -16,6 +16,7 @@ class AnnotatorInfo {
     private String author;
     private String name;
     private String modifiedDate;
+    private String fileName;
 
     public AnnotatorInfo(){
         this.modifiedDate = String.valueOf(System.currentTimeMillis());

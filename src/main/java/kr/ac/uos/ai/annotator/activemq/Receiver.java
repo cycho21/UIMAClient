@@ -1,6 +1,8 @@
 package kr.ac.uos.ai.annotator.activemq;
 
+import kr.ac.uos.ai.annotator.AnnotatorRunningInfo;
 import kr.ac.uos.ai.annotator.bean.JobList;
+import kr.ac.uos.ai.annotator.bean.protocol.AnnotatorInfo;
 import kr.ac.uos.ai.annotator.bean.protocol.Job;
 import kr.ac.uos.ai.annotator.controller.EventAnalyst;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskUnpacker;
@@ -30,6 +32,7 @@ public class Receiver implements Runnable {
     private EventAnalyst eventAnalyst;
 
     public Receiver() {
+        AnnotatorRunningInfo.getInstance();
     }
 
     public String getQueueName() {
@@ -43,7 +46,6 @@ public class Receiver implements Runnable {
     private void consume() {
         try {
             message = consumer.receive();
-            System.out.println(message);
         } catch (JMSException e) {
             e.printStackTrace();
         }
@@ -58,7 +60,7 @@ public class Receiver implements Runnable {
                     if (msg != null) {
                         System.out.println(message);
                         if (msg.getObjectProperty("text").equals("completed")) {
-                            if(msg.getObjectProperty("ip")!=null){
+                            if (msg.getObjectProperty("ip") != null) {
                                 consolePanel.printTextAndNewLine("     ...Upload Annotator to main ");
                             } else {
                                 consolePanel.printTextAndNewLine("     ...Completed");
@@ -67,20 +69,26 @@ public class Receiver implements Runnable {
                     }
                 }
 
-                if (message.getObjectProperty("msgType").equals("anno")){
+                if (message.getObjectProperty("msgType").equals("anno")) {
                     consolePanel.printTextAndNewLine("     ..." + message.getObjectProperty("ip") + "'s Annotator is Starting...");
                 }
 
-                if (message.getObjectProperty("msgType").equals("callBack")){
+                if (message.getObjectProperty("msgType").equals("getAnnotatorListCallBack")) {
+                    consolePanel.printTextAndNewLine("     ... " + "Annotator List ...");
+                    consolePanel.printTextAndNewLine("     ... " + "Annotator Name : " + message.getObjectProperty("annotatorName").toString());
+                    setAnnotatorRunningInfo(message);
+                }
+
+                if (message.getObjectProperty("msgType").equals("callBack")) {
                     consolePanel.printTextAndNewLine(message.getObjectProperty("text").toString());
                 }
 
-                if (message.getObjectProperty("msgType").equals("requestJob")){
+                if (message.getObjectProperty("msgType").equals("requestJob")) {
                     consolePanel.printTextAndNewLine("     ...Executed");
                 }
 
-                if (message.getObjectProperty("msgType").equals("getJobs")){
-                    if(message.getObjectProperty("type").equals("do")){
+                if (message.getObjectProperty("msgType").equals("getJobs")) {
+                    if (message.getObjectProperty("type").equals("do")) {
                         Job tempJob = new Job();
                         tempJob.setJobSize(message.getObjectProperty("jobSize").toString());
                         tempJob.setDeveloper(message.getObjectProperty("developer").toString());
@@ -91,7 +99,7 @@ public class Receiver implements Runnable {
                         JobList.getJobList().put(String.valueOf(JobList.getJobList().size()), tempJob);
                     }
 
-                    if (message.getObjectProperty("type").equals("end")){
+                    if (message.getObjectProperty("type").equals("end")) {
                         consolePanel.printTextAndNewLine("     ...Completed");
                         tree.repaintTree();
                     }
@@ -106,6 +114,24 @@ public class Receiver implements Runnable {
             }
         } catch (Exception e) {
             System.out.println("Receiver Run Error");
+            e.printStackTrace();
+        }
+    }
+
+    private void setAnnotatorRunningInfo(Message localMessage) {
+        AnnotatorInfo annotatorInfo = new AnnotatorInfo();
+        try {
+            if (AnnotatorRunningInfo.getAnnotatorList().containsKey(localMessage.getObjectProperty("annotatorName").toString())) {
+
+                annotatorInfo.setName(localMessage.getObjectProperty("annotatorName").toString());
+                annotatorInfo.setAuthor(localMessage.getObjectProperty("author").toString());
+                annotatorInfo.setModifiedDate(localMessage.getObjectProperty("modifiedDate").toString());
+                annotatorInfo.setFileName(localMessage.getObjectProperty("fileName").toString());
+                annotatorInfo.setVersion(localMessage.getObjectProperty("version").toString());
+                AnnotatorRunningInfo.getAnnotatorList().put(localMessage.getObjectProperty("annotatorName").toString(), annotatorInfo);
+
+            }
+        } catch (JMSException e) {
             e.printStackTrace();
         }
     }

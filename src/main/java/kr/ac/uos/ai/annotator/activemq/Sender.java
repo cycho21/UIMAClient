@@ -75,10 +75,10 @@ public class Sender {
         } catch (JMSException e) {
             e.printStackTrace();
         }
-        consolePanel.printText("Add Initial Annotator to server...     ");
     }
 
     public void sendMessage(byte[] msg, String fileName, Protocol protocol) {
+
         try {
             BytesMessage message = session.createBytesMessage();
             message.writeBytes(msg);
@@ -91,6 +91,7 @@ public class Sender {
             message.setObjectProperty("fileSize", protocol.getJob().getJobSize());
             producer.send(message);
             consolePanel.printText("File Upload to main...     " + fileName);
+
         } catch (JMSException e) {
             e.printStackTrace();
         }
