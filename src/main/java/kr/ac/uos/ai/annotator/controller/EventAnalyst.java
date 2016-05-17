@@ -58,6 +58,7 @@ public class EventAnalyst {
     }
 
     public void upLoad(String filePath, String fileName) {
+
         AnnotatorInfo annotatorInfo = new AnnotatorInfo();
 
         annotatorInfo.setAuthor(Configuration.stringArray[1]);      // annotator's author name
@@ -69,11 +70,12 @@ public class EventAnalyst {
 
         byte[] tempByte = tp.file2Byte(filePath);
 
-        if(fileName.contains("jar")){
+        if(fileName.contains("jar")) {
             sdr.uploadMessage(tempByte, fileName, annotatorInfo);
         } else {
             sdr.uploadMessage(tempByte, fileName, annotatorInfo);
         }
+
     }
 
     private String[] makeMetaData() {
@@ -155,10 +157,18 @@ public class EventAnalyst {
                 JOptionPane jrOptionPane = new JOptionPane();
                 JTextField jobRField = new JTextField(10);
                 JPanel myRPanel = new JPanel();
+
+                JButton inputFileButton = new JButton("***Input file***");
+
+                JButton annotatorButton = new JButton("*Set annotator*");
+
                 myRPanel.setLayout(new BorderLayout());
+
                 myRPanel.add(new JLabel("Job Name :"), BorderLayout.NORTH);
                 myRPanel.add(jobRField);
                 myRPanel.add(new JLabel("File Name :"), BorderLayout.SOUTH);
+                myRPanel.add(inputFileButton);
+                myRPanel.add(annotatorButton);
 
                 jobFileName = jrOptionPane.showInputDialog(null, myRPanel, "UIMA Management Ver. 0.0.1",
                         JOptionPane.INFORMATION_MESSAGE);
