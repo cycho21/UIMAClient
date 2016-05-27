@@ -3,9 +3,11 @@ package kr.ac.uos.ai.annotator.controller;
 import kr.ac.uos.ai.annotator.activemq.Sender;
 import kr.ac.uos.ai.annotator.bean.protocol.AnnotatorInfo;
 import kr.ac.uos.ai.annotator.bean.protocol.Protocol;
+import kr.ac.uos.ai.annotator.bean.protocol.RequestJob;
 import kr.ac.uos.ai.annotator.configure.Configuration;
 import kr.ac.uos.ai.annotator.taskarchiver.TaskPacker;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
+import kr.ac.uos.ai.annotator.view.CustomComboBox;
 import kr.ac.uos.ai.annotator.view.CustomFrame;
 import kr.ac.uos.ai.annotator.view.JobListTree;
 
@@ -37,6 +39,8 @@ public class EventAnalyst {
     private JobListTree tree;
     private String fileExtension;
     private String annotatorFileName;
+    private CustomComboBox customComboBox;
+    private JobListener jobListener;
 
     public EventAnalyst(CustomFrame customFrame, ConsolePanel consolePanel) {
         this.customFrame = customFrame;
@@ -51,9 +55,9 @@ public class EventAnalyst {
 
     public void importFile() {
         if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
-                filePath = customChooser.getSelectedFile().toString();
-                fileName = customChooser.getSelectedFile().getName().toString();
-                consolePanel.printTextAndNewLine("Input File Select : " + filePath);
+            filePath = customChooser.getSelectedFile().toString();
+            fileName = customChooser.getSelectedFile().getName().toString();
+            consolePanel.printTextAndNewLine("Input File Select : " + filePath);
         }
     }
 
@@ -70,7 +74,7 @@ public class EventAnalyst {
 
         byte[] tempByte = tp.file2Byte(filePath);
 
-        if(fileName.contains("jar")) {
+        if (fileName.contains("jar")) {
             sdr.uploadMessage(tempByte, fileName, annotatorInfo);
         } else {
             sdr.uploadMessage(tempByte, fileName, annotatorInfo);
@@ -92,11 +96,11 @@ public class EventAnalyst {
         stringArray[0] = annoField.getText();
         stringArray[1] = version;
 
-        if(annoField.getText()==null || annoField.getText().equals("")){
+        if (annoField.getText() == null || annoField.getText().equals("")) {
             stringArray[0] = "unnamedAnnotator";
         }
 
-        if(version==null || version.equals("")){
+        if (version == null || version.equals("")) {
             stringArray[1] = "1.0.0";
         }
         return stringArray;
@@ -140,7 +144,7 @@ public class EventAnalyst {
                     filePath = customChooser.getSelectedFile().toString();
                     fileName = customChooser.getSelectedFile().getName().toString();
                     fileExtension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-                    if(fileExtension.equals(".jar")) {
+                    if (fileExtension.equals(".jar")) {
                         consolePanel.printTextAndNewLine("Annotator File Select : " + filePath);
                     } else {
                         consolePanel.printTextAndNewLine("Input File Select : " + filePath);
@@ -154,27 +158,12 @@ public class EventAnalyst {
                 break;
 
             case "requestJob":
-                JOptionPane jrOptionPane = new JOptionPane();
-                JTextField jobRField = new JTextField(10);
-                JPanel myRPanel = new JPanel();
-
-                JButton inputFileButton = new JButton("***Input file***");
-
-                JButton annotatorButton = new JButton("*Set annotator*");
-
-                myRPanel.setLayout(new BorderLayout());
-
-                myRPanel.add(new JLabel("Job Name :"), BorderLayout.NORTH);
-                myRPanel.add(jobRField);
-                myRPanel.add(new JLabel("File Name :"), BorderLayout.SOUTH);
-                myRPanel.add(inputFileButton);
-                myRPanel.add(annotatorButton);
-
-                jobFileName = jrOptionPane.showInputDialog(null, myRPanel, "UIMA Management Ver. 0.0.1",
-                        JOptionPane.INFORMATION_MESSAGE);
-                jobName = jobRField.getText();
-
                 this.comboBoxChose = actionCommand;
+
+                sdr.sendMessage("getAnnotatorList", null);
+
+                requestJob();
+
                 consolePanel.printTextAndNewLine("msgType Choose : " + actionCommand);
 
                 break;
@@ -182,6 +171,32 @@ public class EventAnalyst {
             default:
                 break;
         }
+
+    }
+
+    private void requestJob() {
+        JOptionPane jrOptionPane = new JOptionPane();
+        JPanel myRPanel = new JPanel();
+
+        String[] comboBoxContents = new String[]{"Input File", "Set Annotator"};
+        CustomComboBox customComboBox = new CustomComboBox(comboBoxContents);
+        customComboBox.setSelectedItem("Input File");
+
+        JobListener jobListener = new JobListener(customComboBox);
+        jobListener.setCustomFrame(customFrame);
+        jobListener.setConsolePanel(consolePanel);
+
+        customComboBox.addActionListener(jobListener);
+
+        myRPanel.setLayout(new BorderLayout());
+        myRPanel.add(customComboBox, BorderLayout.NORTH);
+        myRPanel.add(new JLabel("Job Name :"), BorderLayout.SOUTH);
+
+        jobFileName = jrOptionPane.showInputDialog(null, myRPanel, "UIMA Management Ver. 0.0.1",
+                JOptionPane.INFORMATION_MESSAGE);
+
+        RequestJob requestedJob = jobListener.getRequestedJob();
+
 
     }
 
@@ -204,7 +219,7 @@ public class EventAnalyst {
                 sdr.sendMessage("getJobList");
                 makeTree();
                 break;
-            case "requestJob" :
+            case "requestJob":
                 Protocol requestProtocol = new Protocol();
                 requestProtocol.makeProtocol(jobName, null, "1.0.0", devName, jobFileName);
                 requestProtocol.setMsgType("requestJob");

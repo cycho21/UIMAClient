@@ -106,7 +106,9 @@ public class Sender {
                 message.setObjectProperty("msgType", getJobList);
                 consolePanel.printText("Request Job List to server...     ");
                 producer.send(message);
+
             } catch (JMSException e) {
+
                 e.printStackTrace();
             }
                 break;

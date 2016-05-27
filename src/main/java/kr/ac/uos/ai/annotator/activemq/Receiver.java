@@ -55,6 +55,7 @@ public class Receiver implements Runnable {
         try {
             while (true) {
                 consume();
+
                 if (message.getObjectProperty("msgType").equals("uploadSeq")) {
                     TextMessage msg = (TextMessage) message;
                     if (msg != null) {
@@ -69,12 +70,18 @@ public class Receiver implements Runnable {
                     }
                 }
 
+                if (message.getObjectProperty("msgType").equals("getJobList")){
+                    if(AnnotatorRunningInfo.getTempAnnotatorList().containsKey(message.getObjectProperty("msgTxt"))) {
+                    } else {
+                        AnnotatorRunningInfo.getTempAnnotatorList().put(message.getObjectProperty("msgTxt").toString(), "true");
+                    }
+                }
+
                 if (message.getObjectProperty("msgType").equals("anno")) {
                     consolePanel.printTextAndNewLine("     ..." + message.getObjectProperty("ip") + "'s Annotator is Starting...");
                 }
 
                 if (message.getObjectProperty("msgType").equals("getAnnotatorListCallBack")) {
-                    consolePanel.printTextAndNewLine("     ... " + "Annotator List ...");
                     consolePanel.printTextAndNewLine("     ... " + "Annotator Name : " + message.getObjectProperty("annotatorName").toString());
                     setAnnotatorRunningInfo(message);
                 }
@@ -122,14 +129,14 @@ public class Receiver implements Runnable {
         AnnotatorInfo annotatorInfo = new AnnotatorInfo();
         try {
             if (AnnotatorRunningInfo.getAnnotatorList().containsKey(localMessage.getObjectProperty("annotatorName").toString())) {
-
+            } else {
                 annotatorInfo.setName(localMessage.getObjectProperty("annotatorName").toString());
                 annotatorInfo.setAuthor(localMessage.getObjectProperty("author").toString());
                 annotatorInfo.setModifiedDate(localMessage.getObjectProperty("modifiedDate").toString());
                 annotatorInfo.setFileName(localMessage.getObjectProperty("fileName").toString());
                 annotatorInfo.setVersion(localMessage.getObjectProperty("version").toString());
-                AnnotatorRunningInfo.getAnnotatorList().put(localMessage.getObjectProperty("annotatorName").toString(), annotatorInfo);
 
+                AnnotatorRunningInfo.getAnnotatorList().put(localMessage.getObjectProperty("annotatorName").toString(), annotatorInfo);
             }
         } catch (JMSException e) {
             e.printStackTrace();

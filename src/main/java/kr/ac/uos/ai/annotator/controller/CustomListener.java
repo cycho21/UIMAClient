@@ -21,6 +21,7 @@ public class CustomListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+
         if(e.getActionCommand().equals("comboBoxChanged")){
             eventAnalyst.firstCombo(msgTypeComboBox.getSelectedItem().toString());
         }

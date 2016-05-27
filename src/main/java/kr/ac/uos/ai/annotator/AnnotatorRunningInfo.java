@@ -15,6 +15,7 @@ public class AnnotatorRunningInfo {
     private static AnnotatorRunningInfo ourInstance = new AnnotatorRunningInfo();
     private static ArrayList<String> nodeList;
     private static HashMap<String, AnnotatorInfo> annotatorList;
+    private static HashMap<String, String> tempAnnotatorList;
 
     public AnnotatorRunningInfo() {
     }
@@ -26,6 +27,15 @@ public class AnnotatorRunningInfo {
             annotatorList = new HashMap<>();
         }
         return annotatorList;
+    }
+
+    public static HashMap<String, String> getTempAnnotatorList() {
+        if(tempAnnotatorList!=null){
+            /* doNothing; */
+        } else {
+            tempAnnotatorList = new HashMap<>();
+        }
+        return tempAnnotatorList;
     }
 
     public static ArrayList<String> getNodeList() {
