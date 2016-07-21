@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 
 public class JobListener implements ActionListener {
 
+    private CustomChooser customChooser;
     private JOptionPane jOptionPane;
     private RequestJob requestedJob;
     private JComboBox typeBox;
@@ -32,6 +33,7 @@ public class JobListener implements ActionListener {
         this.requestedJob = new RequestJob();
         this.typeBox = typeBox;
         this.jOptionPane = new JOptionPane();
+        customChooser = new CustomChooser();
     }
 
     @Override
@@ -56,6 +58,13 @@ public class JobListener implements ActionListener {
     }
 
     private void addInputFile() {
+
+        if (customChooser.showOpenDialog(customFrame) == JFileChooser.APPROVE_OPTION) {
+            filePath = customChooser.getSelectedFile().toString();
+            fileName = customChooser.getSelectedFile().getName().toString();
+        }
+
+
 
     }
 

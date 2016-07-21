@@ -65,6 +65,7 @@ public class GUIManager {
         /*
             GUI init log.
          */
+
         consolePanel.getTextArea().setEditable(false);
         consolePanel.printTextAndNewLine("GUI Initialization OK");
     }

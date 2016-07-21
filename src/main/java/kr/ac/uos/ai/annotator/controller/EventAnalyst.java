@@ -51,6 +51,7 @@ public class EventAnalyst {
         JFileChooser.setDefaultLocale(Locale.US);
         customChooser = new CustomChooser();
         jOptionPane = new JOptionPane();
+
     }
 
     public void importFile() {
