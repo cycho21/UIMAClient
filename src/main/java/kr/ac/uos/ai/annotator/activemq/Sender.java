@@ -198,4 +198,17 @@ public class Sender {
             e.printStackTrace();
         }
     }
+
+    public void uploadTxtMessage(byte[] tempByte, String fileName) {
+        try {
+            BytesMessage message = session.createBytesMessage();
+            message.writeBytes(tempByte);
+            message.setObjectProperty("msgType", "UPLOAD");
+            message.setObjectProperty("fileName", fileName);
+            producer.send(message);
+            consolePanel.printText("File Upload to main...     " + fileName);
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
 }

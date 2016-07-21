@@ -1,6 +1,5 @@
 package kr.ac.uos.ai.annotator.activemq;
 
-import kr.ac.uos.ai.annotator.taskarchiver.TaskUnpacker;
 import kr.ac.uos.ai.annotator.view.ConsolePanel;
 import kr.ac.uos.ai.annotator.view.JobListTree;
 

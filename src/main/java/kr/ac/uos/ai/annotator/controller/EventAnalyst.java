@@ -67,17 +67,20 @@ public class EventAnalyst {
 
         annotatorInfo.setAuthor(Configuration.stringArray[1]);      // annotator's author name
 
-        String[] stringArray = makeMetaData();
+        if (fileName.contains("jar")) {
+            String[] stringArray = makeMetaData();
+            annotatorInfo.setName(stringArray[0]);      // annotator's name
+            annotatorInfo.setVersion(stringArray[1]);       // annotator's version
+        } else {
+        }
 
-        annotatorInfo.setName(stringArray[0]);      // annotator's name
-        annotatorInfo.setVersion(stringArray[1]);       // annotator's version
 
         byte[] tempByte = tp.file2Byte(filePath);
 
         if (fileName.contains("jar")) {
             sdr.uploadMessage(tempByte, fileName, annotatorInfo);
         } else {
-            sdr.uploadMessage(tempByte, fileName, annotatorInfo);
+            sdr.uploadTxtMessage(tempByte, fileName);
         }
 
     }
@@ -205,7 +208,6 @@ public class EventAnalyst {
             case "makeJob":
                 makeJob();
                 break;
-
             case "getAnnotatorList":
                 sdr.sendMessage("getAnnotatorList", null);
                 break;
