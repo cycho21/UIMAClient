@@ -196,11 +196,13 @@ public class EventAnalyst {
         myRPanel.add(customComboBox, BorderLayout.NORTH);
         myRPanel.add(new JLabel("Job Name :"), BorderLayout.SOUTH);
 
-        jobFileName = jrOptionPane.showInputDialog(null, myRPanel, "UIMA Management Ver. 0.0.1",
+        String tempJobName = jrOptionPane.showInputDialog(null, myRPanel, "UIMA Management Ver. 0.0.1",
                 JOptionPane.INFORMATION_MESSAGE);
+        this.jobName = tempJobName;
 
         RequestJob requestedJob = jobListener.getRequestedJob();
-
+        requestedJob.setJobName(tempJobName);
+        this.jobFileName = requestedJob.getJobFileName();
 
     }
 

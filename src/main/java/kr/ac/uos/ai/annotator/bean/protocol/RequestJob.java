@@ -14,6 +14,7 @@ class RequestJob {
 
     private HashMap<String, Integer> annotators;
     private String jobName;
+    private String jobFileName;
 
     public RequestJob() {
         this.annotators = new HashMap<>();

@@ -64,7 +64,7 @@ public class JobListener implements ActionListener {
             fileName = customChooser.getSelectedFile().getName().toString();
         }
 
-
+        this.requestedJob.setJobFileName(fileName);
 
     }
 
